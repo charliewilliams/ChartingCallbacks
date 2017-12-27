@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C060E2EF1FF41E5C005EDF8B /* FuseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E2EC1FF41E5C005EDF8B /* FuseUtilities.swift */; };
+		C060E2F01FF41E5C005EDF8B /* Fuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E2ED1FF41E5C005EDF8B /* Fuse.swift */; };
+		C060E2F11FF41E5C005EDF8B /* String+Fuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E2EE1FF41E5C005EDF8B /* String+Fuse.swift */; };
+		C060E2F21FF41EE2005EDF8B /* Fuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E2ED1FF41E5C005EDF8B /* Fuse.swift */; };
+		C060E2F31FF41EE2005EDF8B /* FuseUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E2EC1FF41E5C005EDF8B /* FuseUtilities.swift */; };
+		C060E2F41FF41EE2005EDF8B /* String+Fuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E2EE1FF41E5C005EDF8B /* String+Fuse.swift */; };
 		C09364F21FF2E81400B9442C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F11FF2E81400B9442C /* main.swift */; };
 		C09364F91FF2ED3200B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
 		C09364FB1FF2EE1F00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
@@ -31,6 +37,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C060E2EC1FF41E5C005EDF8B /* FuseUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuseUtilities.swift; sourceTree = "<group>"; };
+		C060E2ED1FF41E5C005EDF8B /* Fuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fuse.swift; sourceTree = "<group>"; };
+		C060E2EE1FF41E5C005EDF8B /* String+Fuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Fuse.swift"; sourceTree = "<group>"; };
 		C09364EE1FF2E81400B9442C /* ComedyTokenizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ComedyTokenizer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09364F11FF2E81400B9442C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C09364F81FF2ED3200B9442C /* TokenGrouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGrouper.swift; sourceTree = "<group>"; };
@@ -61,10 +70,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C060E2EB1FF41E5C005EDF8B /* Fuse */ = {
+			isa = PBXGroup;
+			children = (
+				C060E2ED1FF41E5C005EDF8B /* Fuse.swift */,
+				C060E2EC1FF41E5C005EDF8B /* FuseUtilities.swift */,
+				C060E2EE1FF41E5C005EDF8B /* String+Fuse.swift */,
+			);
+			path = Fuse;
+			sourceTree = "<group>";
+		};
 		C09364E51FF2E81300B9442C = {
 			isa = PBXGroup;
 			children = (
 				C09364F01FF2E81400B9442C /* ComedyTokenizer */,
+				C060E2EB1FF41E5C005EDF8B /* Fuse */,
 				C09365011FF2EF5800B9442C /* UnitTests */,
 				C09364EF1FF2E81400B9442C /* Products */,
 			);
@@ -193,8 +213,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C09364FB1FF2EE1F00B9442C /* String.swift in Sources */,
+				C060E2F11FF41E5C005EDF8B /* String+Fuse.swift in Sources */,
+				C060E2EF1FF41E5C005EDF8B /* FuseUtilities.swift in Sources */,
 				C09364F21FF2E81400B9442C /* main.swift in Sources */,
 				C09364F91FF2ED3200B9442C /* TokenGrouper.swift in Sources */,
+				C060E2F01FF41E5C005EDF8B /* Fuse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +225,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C060E2F31FF41EE2005EDF8B /* FuseUtilities.swift in Sources */,
+				C060E2F41FF41EE2005EDF8B /* String+Fuse.swift in Sources */,
+				C060E2F21FF41EE2005EDF8B /* Fuse.swift in Sources */,
 				C093650F1FF30BE400B9442C /* TokenGrouper.swift in Sources */,
 				C09365031FF2EF5800B9442C /* UnitTests.swift in Sources */,
 				C093650D1FF3098E00B9442C /* StringTests.swift in Sources */,
