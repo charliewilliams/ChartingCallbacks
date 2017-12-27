@@ -15,7 +15,6 @@ class TokenGrouper {
     
     let words: [String]
     var output: [String: Set<Int>] = [:]
-    let fuse = Fuse()
 
     init(words: [String]) {
 
@@ -40,13 +39,6 @@ class TokenGrouper {
                 if token == inner { // TODO make fuzzy match
 
                     // Write down their indices
-                    out.insert(innerIndex + index)
-
-                } else if let score = fuse.search(inner, in: token)?.score,
-                score > 0.7 {
-                    out.insert(innerIndex + index)
-                } else if let score = fuse.search(token, in: inner)?.score,
-                    score > 0.7 {
                     out.insert(innerIndex + index)
                 }
             }
