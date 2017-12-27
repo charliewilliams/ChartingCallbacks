@@ -22,7 +22,7 @@ import Foundation
 
 guard CommandLine.arguments.count > 1,
     let url = URL(string: (CommandLine.arguments[1] as NSString).expandingTildeInPath) else {
-    fatalError("You must pass a file name to this tool")
+    fatalError("You must pass a file path to this tool")
 }
 
 print(url)
@@ -36,10 +36,10 @@ guard let string = String(data: data, encoding: .utf8) else {
 }
 
 let tokens = string.tokenized()
-let sorter = TokenSorter(tokens: tokens)
+let sorter = TokenGrouper(words: tokens)
 
-try sorter.run(progress: { (token, indices) in
-    print("\(token) appeared at \(indices)")
+sorter.run(progress: { (token, indices) in
+    print("\"\(token)\" appeared at \(indices)")
 }, completion: { output in
 
     let outputPath: String
@@ -49,9 +49,14 @@ try sorter.run(progress: { (token, indices) in
         outputPath = (url.path as NSString).deletingPathExtension + "-output.json"
     }
 
-    let outputString = try JSONEncoder().encode(output)
-    let outputURL = URL(fileURLWithPath: outputPath)
-    try outputString.write(to: outputURL)
+    do {
+        let outputString = try JSONEncoder().encode(output)
+        let outputURL = URL(fileURLWithPath: outputPath)
+        try outputString.write(to: outputURL)
+
+    } catch let e {
+        fatalError(e.localizedDescription)
+    }
 })
 
 

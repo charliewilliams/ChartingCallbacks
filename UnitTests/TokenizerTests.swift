@@ -16,8 +16,8 @@ class TokenSorterTests: XCTestCase {
 
         let e = expectation(description: "Finished")
 
-        let tokenSorter = TokenSorter(tokens: string.tokenized())
-        try? tokenSorter.run(progress: { (_, _) in
+        let tokenSorter = TokenGrouper(words: string.tokenized())
+        tokenSorter.run(progress: { (_, _) in
 
         }) { (output) in
             XCTAssertEqual(output.keys.count, 1)
