@@ -58,6 +58,13 @@ class TokenGrouper {
             forwardGroupSearch(from: word, with: indices)
         }
 
+        // Filter out any phrases contained completely in another phrase so they're not double-counted
+        for (phrase, _) in output {
+            output = output.filter { (word, _) -> Bool in
+                return !phrase.contains(word) || phrase == word
+            }
+        }
+
         completion(output)
     }
 
