@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ComedyTokenizer.xcodeproj">
+      location = "self:/Users/cw/Developer/ComedyTokenizer/ChartingCallbacks.xcodeproj">
    </FileRef>
 </Workspace>

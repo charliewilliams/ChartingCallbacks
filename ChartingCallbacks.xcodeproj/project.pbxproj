@@ -7,18 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C060E3071FF43038005EDF8B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3061FF43038005EDF8B /* main.swift */; };
 		C09364F21FF2E81400B9442C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F11FF2E81400B9442C /* main.swift */; };
 		C09364F91FF2ED3200B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
 		C09364FB1FF2EE1F00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
 		C09365031FF2EF5800B9442C /* UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09365021FF2EF5800B9442C /* UnitTests.swift */; };
 		C09365091FF2EF6700B9442C /* TokenGrouperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09365081FF2EF6700B9442C /* TokenGrouperTests.swift */; };
-		C093650B1FF2FF8000B9442C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C093650A1FF2FF8000B9442C /* README.md */; };
 		C093650D1FF3098E00B9442C /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093650C1FF3098E00B9442C /* StringTests.swift */; };
 		C093650E1FF30A1A00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
 		C093650F1FF30BE400B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		C060E3021FF43038005EDF8B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		C09364EC1FF2E81400B9442C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -31,7 +40,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C09364EE1FF2E81400B9442C /* ComedyTokenizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ComedyTokenizer; sourceTree = BUILT_PRODUCTS_DIR; };
+		C060E3041FF43038005EDF8B /* ChartMaker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ChartMaker; sourceTree = BUILT_PRODUCTS_DIR; };
+		C060E3061FF43038005EDF8B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C09364EE1FF2E81400B9442C /* CallbacksFinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CallbacksFinder; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09364F11FF2E81400B9442C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C09364F81FF2ED3200B9442C /* TokenGrouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGrouper.swift; sourceTree = "<group>"; };
 		C09364FA1FF2EE1F00B9442C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -39,11 +50,17 @@
 		C09365021FF2EF5800B9442C /* UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTests.swift; sourceTree = "<group>"; };
 		C09365041FF2EF5800B9442C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C09365081FF2EF6700B9442C /* TokenGrouperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGrouperTests.swift; sourceTree = "<group>"; };
-		C093650A1FF2FF8000B9442C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		C093650C1FF3098E00B9442C /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C060E3011FF43038005EDF8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C09364EB1FF2E81400B9442C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,10 +78,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C060E3051FF43038005EDF8B /* ChartMaker */ = {
+			isa = PBXGroup;
+			children = (
+				C060E3061FF43038005EDF8B /* main.swift */,
+			);
+			path = ChartMaker;
+			sourceTree = "<group>";
+		};
 		C09364E51FF2E81300B9442C = {
 			isa = PBXGroup;
 			children = (
-				C09364F01FF2E81400B9442C /* ComedyTokenizer */,
+				C09364F01FF2E81400B9442C /* CallbacksFinder */,
+				C060E3051FF43038005EDF8B /* ChartMaker */,
 				C09365011FF2EF5800B9442C /* UnitTests */,
 				C09364EF1FF2E81400B9442C /* Products */,
 			);
@@ -73,21 +99,21 @@
 		C09364EF1FF2E81400B9442C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C09364EE1FF2E81400B9442C /* ComedyTokenizer */,
+				C09364EE1FF2E81400B9442C /* CallbacksFinder */,
 				C09365001FF2EF5800B9442C /* UnitTests.xctest */,
+				C060E3041FF43038005EDF8B /* ChartMaker */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C09364F01FF2E81400B9442C /* ComedyTokenizer */ = {
+		C09364F01FF2E81400B9442C /* CallbacksFinder */ = {
 			isa = PBXGroup;
 			children = (
 				C09364F11FF2E81400B9442C /* main.swift */,
 				C09364F81FF2ED3200B9442C /* TokenGrouper.swift */,
 				C09364FA1FF2EE1F00B9442C /* String.swift */,
-				C093650A1FF2FF8000B9442C /* README.md */,
 			);
-			path = ComedyTokenizer;
+			path = CallbacksFinder;
 			sourceTree = "<group>";
 		};
 		C09365011FF2EF5800B9442C /* UnitTests */ = {
@@ -104,9 +130,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C09364ED1FF2E81400B9442C /* ComedyTokenizer */ = {
+		C060E3031FF43038005EDF8B /* ChartMaker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C09364F51FF2E81400B9442C /* Build configuration list for PBXNativeTarget "ComedyTokenizer" */;
+			buildConfigurationList = C060E3081FF43038005EDF8B /* Build configuration list for PBXNativeTarget "ChartMaker" */;
+			buildPhases = (
+				C060E3001FF43038005EDF8B /* Sources */,
+				C060E3011FF43038005EDF8B /* Frameworks */,
+				C060E3021FF43038005EDF8B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChartMaker;
+			productName = ChartMaker;
+			productReference = C060E3041FF43038005EDF8B /* ChartMaker */;
+			productType = "com.apple.product-type.tool";
+		};
+		C09364ED1FF2E81400B9442C /* CallbacksFinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C09364F51FF2E81400B9442C /* Build configuration list for PBXNativeTarget "CallbacksFinder" */;
 			buildPhases = (
 				C09364EA1FF2E81400B9442C /* Sources */,
 				C09364EB1FF2E81400B9442C /* Frameworks */,
@@ -116,9 +159,9 @@
 			);
 			dependencies = (
 			);
-			name = ComedyTokenizer;
+			name = CallbacksFinder;
 			productName = ComedyTokenizer;
-			productReference = C09364EE1FF2E81400B9442C /* ComedyTokenizer */;
+			productReference = C09364EE1FF2E81400B9442C /* CallbacksFinder */;
 			productType = "com.apple.product-type.tool";
 		};
 		C09364FF1FF2EF5800B9442C /* UnitTests */ = {
@@ -148,6 +191,10 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Charlie Williams";
 				TargetAttributes = {
+					C060E3031FF43038005EDF8B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					C09364ED1FF2E81400B9442C = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -158,7 +205,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C09364E91FF2E81300B9442C /* Build configuration list for PBXProject "ComedyTokenizer" */;
+			buildConfigurationList = C09364E91FF2E81300B9442C /* Build configuration list for PBXProject "ChartingCallbacks" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -170,7 +217,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C09364ED1FF2E81400B9442C /* ComedyTokenizer */,
+				C09364ED1FF2E81400B9442C /* CallbacksFinder */,
+				C060E3031FF43038005EDF8B /* ChartMaker */,
 				C09364FF1FF2EF5800B9442C /* UnitTests */,
 			);
 		};
@@ -181,13 +229,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C093650B1FF2FF8000B9442C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C060E3001FF43038005EDF8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C060E3071FF43038005EDF8B /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C09364EA1FF2E81400B9442C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -213,6 +268,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		C060E3091FF43038005EDF8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N2WM6EN8GQ;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		C060E30A1FF43038005EDF8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N2WM6EN8GQ;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		C09364F31FF2E81400B9442C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -370,7 +445,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C09364E91FF2E81300B9442C /* Build configuration list for PBXProject "ComedyTokenizer" */ = {
+		C060E3081FF43038005EDF8B /* Build configuration list for PBXNativeTarget "ChartMaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C060E3091FF43038005EDF8B /* Debug */,
+				C060E30A1FF43038005EDF8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C09364E91FF2E81300B9442C /* Build configuration list for PBXProject "ChartingCallbacks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C09364F31FF2E81400B9442C /* Debug */,
@@ -379,7 +463,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C09364F51FF2E81400B9442C /* Build configuration list for PBXNativeTarget "ComedyTokenizer" */ = {
+		C09364F51FF2E81400B9442C /* Build configuration list for PBXNativeTarget "CallbacksFinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C09364F61FF2E81400B9442C /* Debug */,

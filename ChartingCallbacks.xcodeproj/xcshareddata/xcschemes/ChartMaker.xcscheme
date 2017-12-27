@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C09364ED1FF2E81400B9442C"
-               BuildableName = "ComedyTokenizer"
-               BlueprintName = "ComedyTokenizer"
-               ReferencedContainer = "container:ComedyTokenizer.xcodeproj">
+               BlueprintIdentifier = "C060E3031FF43038005EDF8B"
+               BuildableName = "ChartMaker"
+               BlueprintName = "ChartMaker"
+               ReferencedContainer = "container:ChartingCallbacks.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,24 +29,14 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C09364FF1FF2EF5800B9442C"
-               BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
-               ReferencedContainer = "container:ComedyTokenizer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C09364ED1FF2E81400B9442C"
-            BuildableName = "ComedyTokenizer"
-            BlueprintName = "ComedyTokenizer"
-            ReferencedContainer = "container:ComedyTokenizer.xcodeproj">
+            BlueprintIdentifier = "C060E3031FF43038005EDF8B"
+            BuildableName = "ChartMaker"
+            BlueprintName = "ChartMaker"
+            ReferencedContainer = "container:ChartingCallbacks.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,18 +57,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C09364ED1FF2E81400B9442C"
-            BuildableName = "ComedyTokenizer"
-            BlueprintName = "ComedyTokenizer"
-            ReferencedContainer = "container:ComedyTokenizer.xcodeproj">
+            BlueprintIdentifier = "C060E3031FF43038005EDF8B"
+            BuildableName = "ChartMaker"
+            BlueprintName = "ChartMaker"
+            ReferencedContainer = "container:ChartingCallbacks.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "~/Developer/ComedyTokenizer/README.md"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -92,10 +76,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C09364ED1FF2E81400B9442C"
-            BuildableName = "ComedyTokenizer"
-            BlueprintName = "ComedyTokenizer"
-            ReferencedContainer = "container:ComedyTokenizer.xcodeproj">
+            BlueprintIdentifier = "C060E3031FF43038005EDF8B"
+            BuildableName = "ChartMaker"
+            BlueprintName = "ChartMaker"
+            ReferencedContainer = "container:ChartingCallbacks.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
