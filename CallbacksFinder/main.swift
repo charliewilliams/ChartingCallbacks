@@ -50,6 +50,8 @@ sorter.run(progress: { (token, indices) in
     }
 
     do {
+        var output = output
+        output["__originalString"] = tokens
         let outputString = try JSONEncoder().encode(output)
         let outputURL = URL(fileURLWithPath: outputPath)
         try outputString.write(to: outputURL)
