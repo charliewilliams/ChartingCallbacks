@@ -2,9 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-        <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -710,30 +708,7 @@
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4TU-WG-xW4">
-                                <rect key="frame" x="104" y="178" width="37" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="CxT-rk-Odl">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <stackView distribution="fillEqually" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JDB-tO-DOG">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="67"/>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="JDB-tO-DOG" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Btf-S5-NBH"/>
-                            <constraint firstAttribute="bottom" secondItem="JDB-tO-DOG" secondAttribute="bottom" id="But-lM-Gwk"/>
-                            <constraint firstItem="JDB-tO-DOG" firstAttribute="height" secondItem="m2S-Jp-Qdl" secondAttribute="height" multiplier="0.25" id="IU8-26-MHS"/>
-                            <constraint firstAttribute="trailing" secondItem="JDB-tO-DOG" secondAttribute="trailing" id="nTC-2k-Pfo"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="perWordStackView" destination="JDB-tO-DOG" id="7dP-TK-mka"/>
-                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

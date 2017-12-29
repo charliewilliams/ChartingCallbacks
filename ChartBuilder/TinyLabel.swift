@@ -8,14 +8,11 @@
 
 import Cocoa
 
-class TinyLabel: NSTextView { // NSTextField
+class TinyLabel: NSTextView {
 
     override var intrinsicContentSize: NSSize {
-
-        if layoutOrientation != .horizontal {
-            print("here")
-        }
-        return NSSize(width: 10, height: 10)
+        sizeToFit()
+        return NSSize(width: 100, height: 10)
     }
 
     override var wantsDefaultClipping: Bool {
@@ -26,13 +23,11 @@ class TinyLabel: NSTextView { // NSTextField
         super.init(frame: .zero)
 
         self.string = string
-//        stringValue = string
-        layout()
+
         font = NSFont.systemFont(ofSize: 8)
         translatesAutoresizingMaskIntoConstraints = false
-        frameRotation = -90
-        backgroundColor = .red
-        layer?.masksToBounds = false
+        frameRotation = 90
+        alignment = .right
     }
 
     override init(frame frameRect: NSRect, textContainer container: NSTextContainer?) {

@@ -10,7 +10,6 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    @IBOutlet var perWordStackView: NSStackView!
     var perWordLabels: [AnyObject] = []
     var loadedJSON: [String: AnyObject]? {
         didSet {
@@ -23,20 +22,12 @@ class ViewController: NSViewController {
                 return
             }
 
-            for word in fullText {
+            for (index, word) in fullText.enumerated() {
 
                 let label = TinyLabel(string: word)
-//                perWordStackView.addSubview(label)
                 view.addSubview(label)
-                // pin to bottom
                 view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
-                // pin to previous + equal height
-                if let previous = perWordLabels.last {
-                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: previous, attribute: .trailing, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing))
-                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: previous, attribute: .height, multiplier: 1.0, constant: 0))
-                } else {
-                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.leftMargin))
-                }
+                view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index)))
                 perWordLabels.append(label)
             }
             view.layoutSubtreeIfNeeded()
@@ -59,9 +50,6 @@ class ViewController: NSViewController {
             label.removeFromSuperview()
         }
         perWordLabels = []
-        for view in perWordStackView.subviews {
-            view.removeFromSuperview()
-        }
     }
 
     override func viewDidAppear() {
