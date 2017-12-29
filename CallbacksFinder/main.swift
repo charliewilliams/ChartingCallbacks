@@ -50,9 +50,10 @@ sorter.run(progress: { (token, indices) in
     }
 
     do {
-        var output = output
-        output["__originalString"] = tokens
-        let outputString = try JSONEncoder().encode(output)
+        let serializable = output.map { [$0: Array($1) ] }
+        var json: [String: Any] = [Keys.analysis.rawValue: serializable]
+        json[Keys.fullText.rawValue] = tokens
+        let outputString = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
         let outputURL = URL(fileURLWithPath: outputPath)
         try outputString.write(to: outputURL)
 

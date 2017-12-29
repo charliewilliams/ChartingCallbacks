@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		C060E3071FF43038005EDF8B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3061FF43038005EDF8B /* main.swift */; };
+		C060E3121FF44B5E005EDF8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3111FF44B5E005EDF8B /* AppDelegate.swift */; };
+		C060E3141FF44B5E005EDF8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3131FF44B5E005EDF8B /* ViewController.swift */; };
+		C060E3161FF44B5E005EDF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060E3151FF44B5E005EDF8B /* Assets.xcassets */; };
+		C060E3191FF44B5E005EDF8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060E3171FF44B5E005EDF8B /* Main.storyboard */; };
+		C060E3251FF44B5E005EDF8B /* ChartBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3241FF44B5E005EDF8B /* ChartBuilderTests.swift */; };
+		C060E3581FF6CE88005EDF8B /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3571FF6CE88005EDF8B /* Keys.swift */; };
+		C060E3591FF6CE88005EDF8B /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3571FF6CE88005EDF8B /* Keys.swift */; };
+		C060E35B1FF6D0C8005EDF8B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E35A1FF6D0C8005EDF8B /* Alert.swift */; };
+		C060E35D1FF6D307005EDF8B /* TinyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E35C1FF6D307005EDF8B /* TinyLabel.swift */; };
+		C060E35F1FF6D483005EDF8B /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E35E1FF6D483005EDF8B /* Layout.swift */; };
+		C060E3611FF6EF4D005EDF8B /* Degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3601FF6EF4D005EDF8B /* Degrees.swift */; };
 		C09364F21FF2E81400B9442C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F11FF2E81400B9442C /* main.swift */; };
 		C09364F91FF2ED3200B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
 		C09364FB1FF2EE1F00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
@@ -17,6 +28,16 @@
 		C093650E1FF30A1A00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
 		C093650F1FF30BE400B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C060E3211FF44B5E005EDF8B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C09364E61FF2E81300B9442C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C060E30E1FF44B5E005EDF8B;
+			remoteInfo = ChartBuilder;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		C060E3021FF43038005EDF8B /* CopyFiles */ = {
@@ -42,6 +63,21 @@
 /* Begin PBXFileReference section */
 		C060E3041FF43038005EDF8B /* ChartMaker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ChartMaker; sourceTree = BUILT_PRODUCTS_DIR; };
 		C060E3061FF43038005EDF8B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		C060E30F1FF44B5E005EDF8B /* ChartBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChartBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C060E3111FF44B5E005EDF8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C060E3131FF44B5E005EDF8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C060E3151FF44B5E005EDF8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C060E3181FF44B5E005EDF8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C060E31A1FF44B5E005EDF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C060E31B1FF44B5E005EDF8B /* ChartBuilder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartBuilder.entitlements; sourceTree = "<group>"; };
+		C060E3201FF44B5E005EDF8B /* ChartBuilderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChartBuilderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C060E3241FF44B5E005EDF8B /* ChartBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBuilderTests.swift; sourceTree = "<group>"; };
+		C060E3261FF44B5E005EDF8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C060E3571FF6CE88005EDF8B /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		C060E35A1FF6D0C8005EDF8B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		C060E35C1FF6D307005EDF8B /* TinyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyLabel.swift; sourceTree = "<group>"; };
+		C060E35E1FF6D483005EDF8B /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		C060E3601FF6EF4D005EDF8B /* Degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degrees.swift; sourceTree = "<group>"; };
 		C09364EE1FF2E81400B9442C /* CallbacksFinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CallbacksFinder; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09364F11FF2E81400B9442C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C09364F81FF2ED3200B9442C /* TokenGrouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGrouper.swift; sourceTree = "<group>"; };
@@ -55,6 +91,20 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		C060E3011FF43038005EDF8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C060E30C1FF44B5E005EDF8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C060E31D1FF44B5E005EDF8B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -86,12 +136,40 @@
 			path = ChartMaker;
 			sourceTree = "<group>";
 		};
+		C060E3101FF44B5E005EDF8B /* ChartBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				C060E3111FF44B5E005EDF8B /* AppDelegate.swift */,
+				C060E3131FF44B5E005EDF8B /* ViewController.swift */,
+				C060E35A1FF6D0C8005EDF8B /* Alert.swift */,
+				C060E35C1FF6D307005EDF8B /* TinyLabel.swift */,
+				C060E3601FF6EF4D005EDF8B /* Degrees.swift */,
+				C060E35E1FF6D483005EDF8B /* Layout.swift */,
+				C060E3151FF44B5E005EDF8B /* Assets.xcassets */,
+				C060E3171FF44B5E005EDF8B /* Main.storyboard */,
+				C060E31A1FF44B5E005EDF8B /* Info.plist */,
+				C060E31B1FF44B5E005EDF8B /* ChartBuilder.entitlements */,
+			);
+			path = ChartBuilder;
+			sourceTree = "<group>";
+		};
+		C060E3231FF44B5E005EDF8B /* ChartBuilderTests */ = {
+			isa = PBXGroup;
+			children = (
+				C060E3241FF44B5E005EDF8B /* ChartBuilderTests.swift */,
+				C060E3261FF44B5E005EDF8B /* Info.plist */,
+			);
+			path = ChartBuilderTests;
+			sourceTree = "<group>";
+		};
 		C09364E51FF2E81300B9442C = {
 			isa = PBXGroup;
 			children = (
 				C09364F01FF2E81400B9442C /* CallbacksFinder */,
 				C060E3051FF43038005EDF8B /* ChartMaker */,
+				C060E3101FF44B5E005EDF8B /* ChartBuilder */,
 				C09365011FF2EF5800B9442C /* UnitTests */,
+				C060E3231FF44B5E005EDF8B /* ChartBuilderTests */,
 				C09364EF1FF2E81400B9442C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +180,8 @@
 				C09364EE1FF2E81400B9442C /* CallbacksFinder */,
 				C09365001FF2EF5800B9442C /* UnitTests.xctest */,
 				C060E3041FF43038005EDF8B /* ChartMaker */,
+				C060E30F1FF44B5E005EDF8B /* ChartBuilder.app */,
+				C060E3201FF44B5E005EDF8B /* ChartBuilderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				C09364F11FF2E81400B9442C /* main.swift */,
+				C060E3571FF6CE88005EDF8B /* Keys.swift */,
 				C09364F81FF2ED3200B9442C /* TokenGrouper.swift */,
 				C09364FA1FF2EE1F00B9442C /* String.swift */,
 			);
@@ -146,6 +227,41 @@
 			productName = ChartMaker;
 			productReference = C060E3041FF43038005EDF8B /* ChartMaker */;
 			productType = "com.apple.product-type.tool";
+		};
+		C060E30E1FF44B5E005EDF8B /* ChartBuilder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C060E3271FF44B5E005EDF8B /* Build configuration list for PBXNativeTarget "ChartBuilder" */;
+			buildPhases = (
+				C060E30B1FF44B5E005EDF8B /* Sources */,
+				C060E30C1FF44B5E005EDF8B /* Frameworks */,
+				C060E30D1FF44B5E005EDF8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChartBuilder;
+			productName = ChartBuilder;
+			productReference = C060E30F1FF44B5E005EDF8B /* ChartBuilder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C060E31F1FF44B5E005EDF8B /* ChartBuilderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C060E32A1FF44B5E005EDF8B /* Build configuration list for PBXNativeTarget "ChartBuilderTests" */;
+			buildPhases = (
+				C060E31C1FF44B5E005EDF8B /* Sources */,
+				C060E31D1FF44B5E005EDF8B /* Frameworks */,
+				C060E31E1FF44B5E005EDF8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C060E3221FF44B5E005EDF8B /* PBXTargetDependency */,
+			);
+			name = ChartBuilderTests;
+			productName = ChartBuilderTests;
+			productReference = C060E3201FF44B5E005EDF8B /* ChartBuilderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C09364ED1FF2E81400B9442C /* CallbacksFinder */ = {
 			isa = PBXNativeTarget;
@@ -195,6 +311,20 @@
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
+					C060E30E1FF44B5E005EDF8B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					C060E31F1FF44B5E005EDF8B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = C060E30E1FF44B5E005EDF8B;
+					};
 					C09364ED1FF2E81400B9442C = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -211,6 +341,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = C09364E51FF2E81300B9442C;
 			productRefGroup = C09364EF1FF2E81400B9442C /* Products */;
@@ -220,11 +351,29 @@
 				C09364ED1FF2E81400B9442C /* CallbacksFinder */,
 				C060E3031FF43038005EDF8B /* ChartMaker */,
 				C09364FF1FF2EF5800B9442C /* UnitTests */,
+				C060E30E1FF44B5E005EDF8B /* ChartBuilder */,
+				C060E31F1FF44B5E005EDF8B /* ChartBuilderTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C060E30D1FF44B5E005EDF8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C060E3161FF44B5E005EDF8B /* Assets.xcassets in Resources */,
+				C060E3191FF44B5E005EDF8B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C060E31E1FF44B5E005EDF8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C09364FE1FF2EF5800B9442C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -243,11 +392,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C060E30B1FF44B5E005EDF8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C060E3141FF44B5E005EDF8B /* ViewController.swift in Sources */,
+				C060E35D1FF6D307005EDF8B /* TinyLabel.swift in Sources */,
+				C060E3591FF6CE88005EDF8B /* Keys.swift in Sources */,
+				C060E35B1FF6D0C8005EDF8B /* Alert.swift in Sources */,
+				C060E3611FF6EF4D005EDF8B /* Degrees.swift in Sources */,
+				C060E3121FF44B5E005EDF8B /* AppDelegate.swift in Sources */,
+				C060E35F1FF6D483005EDF8B /* Layout.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C060E31C1FF44B5E005EDF8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C060E3251FF44B5E005EDF8B /* ChartBuilderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C09364EA1FF2E81400B9442C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C09364FB1FF2EE1F00B9442C /* String.swift in Sources */,
+				C060E3581FF6CE88005EDF8B /* Keys.swift in Sources */,
 				C09364F21FF2E81400B9442C /* main.swift in Sources */,
 				C09364F91FF2ED3200B9442C /* TokenGrouper.swift in Sources */,
 			);
@@ -267,6 +439,25 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C060E3221FF44B5E005EDF8B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C060E30E1FF44B5E005EDF8B /* ChartBuilder */;
+			targetProxy = C060E3211FF44B5E005EDF8B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C060E3171FF44B5E005EDF8B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C060E3181FF44B5E005EDF8B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		C060E3091FF43038005EDF8B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -285,6 +476,70 @@
 				DEVELOPMENT_TEAM = N2WM6EN8GQ;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		C060E3281FF44B5E005EDF8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N2WM6EN8GQ;
+				INFOPLIST_FILE = ChartBuilder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.charliewilliams.ChartBuilder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		C060E3291FF44B5E005EDF8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N2WM6EN8GQ;
+				INFOPLIST_FILE = ChartBuilder/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.charliewilliams.ChartBuilder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		C060E32B1FF44B5E005EDF8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N2WM6EN8GQ;
+				INFOPLIST_FILE = ChartBuilderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.charliewilliams.ChartBuilderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChartBuilder.app/Contents/MacOS/ChartBuilder";
+			};
+			name = Debug;
+		};
+		C060E32C1FF44B5E005EDF8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N2WM6EN8GQ;
+				INFOPLIST_FILE = ChartBuilderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.charliewilliams.ChartBuilderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChartBuilder.app/Contents/MacOS/ChartBuilder";
 			};
 			name = Release;
 		};
@@ -450,6 +705,24 @@
 			buildConfigurations = (
 				C060E3091FF43038005EDF8B /* Debug */,
 				C060E30A1FF43038005EDF8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C060E3271FF44B5E005EDF8B /* Build configuration list for PBXNativeTarget "ChartBuilder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C060E3281FF44B5E005EDF8B /* Debug */,
+				C060E3291FF44B5E005EDF8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C060E32A1FF44B5E005EDF8B /* Build configuration list for PBXNativeTarget "ChartBuilderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C060E32B1FF44B5E005EDF8B /* Debug */,
+				C060E32C1FF44B5E005EDF8B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
