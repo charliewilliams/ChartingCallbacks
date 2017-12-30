@@ -10,9 +10,9 @@ import Cocoa
 
 class BigLabel: NSTextView {
 
-//    override var intrinsicContentSize: NSSize {
-//        return NSSize(width: 100, height: 10)
-//    }
+    override var intrinsicContentSize: NSSize {
+        return NSSize(width: 200, height: 100)
+    }
 
     init(string: String) {
         super.init(frame: .zero)

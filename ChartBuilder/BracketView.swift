@@ -44,6 +44,9 @@ class BracketView: NSView {
 
     override func draw(_ dirtyRect: NSRect) {
 
+        NSColor.orange.setFill()
+        dirtyRect.fill()
+
         // Draw bezier paths
         for path in bezierPaths {
             color.set()
