@@ -10,27 +10,45 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    var perWordLabels: [AnyObject] = []
+    var perWordLabels: [NSTextView] = []
+    var brackets: [BracketView] = []
     var loadedJSON: [String: AnyObject]? {
         didSet {
             guard let loadedJSON = loadedJSON else { return }
 
             // draw to screen
             guard let fullText = loadedJSON[Keys.fullText.rawValue] as? [String],
-            let analysis = loadedJSON[Keys.analysis.rawValue] else {
+            let analysis = loadedJSON[Keys.analysis.rawValue]?.firstObject as? [String: [Int]] else {
                 Alert(type: .fileLoadError(nil)).runModal()
                 return
             }
 
+            let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count + 1) + Layout.tinyWordLeftPadding
+
+            // tiny words of full text along the bottom
             for (index, word) in fullText.enumerated() {
 
                 let label = TinyLabel(string: word)
                 view.addSubview(label)
                 view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
-                view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index)))
+                view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
                 perWordLabels.append(label)
             }
-            view.layoutSubtreeIfNeeded()
+
+            // for each 'callback' make a selectable bracket + label
+            for (word, indices) in analysis {
+
+                let bracket = BracketView(word: word, indices: indices)
+                view.addSubview(bracket)
+
+                let views = ["bracket": bracket]
+                let metrics = ["top": Layout.bigLabelTopPadding, "bottom": Layout.bracketStartY, "left": Layout.tinyWordLeftPadding, "width": totalWidth] as [String: NSNumber]
+
+                view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(left)-[bracket(width)]", options: [], metrics: metrics, views: views))
+                view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
+
+                brackets.append(bracket)
+            }
         }
     }
 
@@ -49,7 +67,11 @@ class ViewController: NSViewController {
         for label in perWordLabels {
             label.removeFromSuperview()
         }
+        for bracket in brackets {
+            bracket.removeFromSuperview()
+        }
         perWordLabels = []
+        brackets = []
     }
 
     override func viewDidAppear() {
