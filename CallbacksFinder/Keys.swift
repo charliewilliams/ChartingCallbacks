@@ -11,6 +11,11 @@ import Foundation
 enum Keys: String {
     case fullText
     case analysis
+    case layout
+
+    case labelPosition
+    case color
+    case alpha
 }
 
 struct Text {

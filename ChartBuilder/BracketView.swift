@@ -15,8 +15,9 @@ class BracketView: NSView {
     let mainLabel: NSTextView
     var bezierPaths: [NSBezierPath] = []
     var color: NSColor = .red
+    var mainLabelPosition = CGPoint(x: 0.5, y: 0.5)
 
-    init(word: String, indices: [Int]) {
+    init(word: String, indices: [Int], layout: [String: AnyObject]?) {
 
         self.word = word
         self.indices = indices
@@ -26,6 +27,18 @@ class BracketView: NSView {
         translatesAutoresizingMaskIntoConstraints = false
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainLabel)
+
+        if let layout = layout {
+            if let labelPosition = layout[Keys.labelPosition.rawValue] as? CGPoint {
+                mainLabelPosition = labelPosition
+            }
+            if let color = layout[Keys.color.rawValue] as? NSColor {
+                self.color = color
+            }
+            if let alpha = layout[Keys.alpha.rawValue] as? CGFloat {
+                alphaValue = alpha
+            }
+        }
     }
 
     required init?(coder decoder: NSCoder) {
@@ -36,8 +49,8 @@ class BracketView: NSView {
 
         mainLabel.removeConstraints(mainLabel.constraints)
 
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
+        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: mainLabelPosition.x * 2, constant: 0))
+        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: mainLabelPosition.y * 2, constant: 0))
 
         super.layoutSubtreeIfNeeded()
     }

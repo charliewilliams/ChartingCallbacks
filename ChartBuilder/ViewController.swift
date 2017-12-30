@@ -23,6 +23,7 @@ class ViewController: NSViewController {
                 return
             }
 
+            let layout = loadedJSON[Keys.layout.rawValue] as? [String: [String: AnyObject]]
             let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count + 1) + Layout.tinyWordLeftPadding
 
             // tiny words of full text along the bottom
@@ -38,7 +39,8 @@ class ViewController: NSViewController {
             // for each 'callback' make a selectable bracket + label
             for (word, indices) in analysis {
 
-                let bracket = BracketView(word: word, indices: indices)
+                // if existing layout info exists, set it on each view
+                let bracket = BracketView(word: word, indices: indices, layout: layout?[word])
                 view.addSubview(bracket)
 
                 let views = ["bracket": bracket]
