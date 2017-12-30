@@ -7,64 +7,134 @@
 //
 
 import Cocoa
+import Quartz
 
 class ViewController: NSViewController {
 
     var perWordLabels: [NSTextView] = []
     var brackets: [BracketView] = []
-    var loadedJSON: [String: AnyObject]? {
-        didSet {
-            guard let loadedJSON = loadedJSON else { return }
-
-            // draw to screen
-            guard let fullText = loadedJSON[Keys.fullText.rawValue] as? [String],
-            let analysis = loadedJSON[Keys.analysis.rawValue]?.firstObject as? [String: [Int]] else {
-                Alert(type: .fileLoadError(nil)).runModal()
-                return
-            }
-
-            let layout = loadedJSON[Keys.layout.rawValue] as? [String: [String: AnyObject]]
-            let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count + 1) + Layout.tinyWordLeftPadding
-
-            // tiny words of full text along the bottom
-            for (index, word) in fullText.enumerated() {
-
-                let label = TinyLabel(string: word)
-                view.addSubview(label)
-                view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
-                view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
-                perWordLabels.append(label)
-            }
-
-            // for each 'callback' make a selectable bracket + label
-            for (word, indices) in analysis {
-
-                // if existing layout info exists, set it on each view
-                let bracket = BracketView(word: word, indices: indices, layout: layout?[word])
-                view.addSubview(bracket)
-
-                let views = ["bracket": bracket]
-                let metrics = ["top": Layout.bigLabelTopPadding, "bottom": Layout.bracketStartY, "left": Layout.tinyWordLeftPadding, "width": totalWidth] as [String: NSNumber]
-
-                view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(left)-[bracket(width)]", options: [], metrics: metrics, views: views))
-                view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
-
-                brackets.append(bracket)
-            }
-        }
-    }
+    var json: [String: AnyObject]?
+    var readURL: URL?
 
     init(url: URL) {
         super.init(nibName: nil, bundle: nil)
 
-        loadFile(fromURL: url)
+        readURL = url
+        loadFile(from: url)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
-    private func reset() {
+    override func viewDidAppear() {
+        super.viewDidAppear()
+
+        if json == nil {
+
+            loadFile(from: URL(fileURLWithPath: NSString(string: "/Users/cw/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false))
+//            showOpenPanel()
+        }
+
+//        becomeFirstResponder()
+    }
+}
+
+private extension ViewController {
+
+    func redraw() {
+
+        guard let json = json else { return }
+
+        // draw to screen
+        guard let fullText = json[Keys.fullText.rawValue] as? [String],
+            let analysis = json[Keys.analysis.rawValue]?.firstObject as? [String: [Int]] else {
+                Alert(type: .fileLoadError(nil)).runModal()
+                return
+        }
+
+        let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
+        let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count + 1) + Layout.tinyWordLeftPadding
+
+        // tiny words of full text along the bottom
+        for (index, word) in fullText.enumerated() {
+
+            let label = TinyLabel(string: word)
+            view.addSubview(label)
+            view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
+            view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
+            perWordLabels.append(label)
+        }
+
+        // for each 'callback' make a selectable bracket + label
+        for (word, indices) in analysis {
+
+            // if existing layout info exists, set it on each view
+            let bracket = BracketView(word: word, indices: indices, layout: layout?[word])
+            view.addSubview(bracket)
+
+            let views = ["bracket": bracket]
+            let metrics = ["top": Layout.bigLabelTopPadding, "bottom": Layout.bracketStartY, "left": Layout.tinyWordLeftPadding, "width": totalWidth] as [String: NSNumber]
+
+            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(left)-[bracket(width)]", options: [], metrics: metrics, views: views))
+            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
+
+            brackets.append(bracket)
+        }
+    }
+
+    func loadFile(from url: URL) {
+
+        readURL = url
+
+        if let data = FileManager.default.contents(atPath: url.path) {
+            do {
+                json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject]
+                redraw()
+            } catch let e {
+                Alert(type: .fileLoadError(e)).runModal()
+            }
+        }
+    }
+
+    func saveFile(to url: URL) {
+
+        // save json
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
+            try data.write(to: url)
+        } catch let e {
+            Alert(type: .fileSaveError(e)).runModal()
+        }
+
+        // export pdf
+        guard let bitmapRep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else {
+            return
+        }
+
+        view.cacheDisplay(in: view.bounds, to: bitmapRep)
+        let image = NSImage(size: view.bounds.size)
+        image.addRepresentation(bitmapRep)
+        if let page = PDFPage(image: image) {
+            let doc = PDFDocument()
+            doc.insert(page, at: 0)
+            let saveURL = url.deletingPathExtension().appendingPathExtension("pdf")
+            doc.write(to: saveURL)
+        }
+
+        // what the hell, png too
+        if let data = bitmapRep.representation(using: .png, properties: [:]) {
+            let saveURL = url.deletingPathExtension().appendingPathExtension("png")
+
+            do {
+                try data.write(to: saveURL)
+            } catch let e {
+                Alert(type: .fileSaveError(e)).runModal()
+            }
+        }
+    }
+
+    func reset() {
 
         for label in perWordLabels {
             label.removeFromSuperview()
@@ -75,18 +145,12 @@ class ViewController: NSViewController {
         perWordLabels = []
         brackets = []
     }
+}
 
-    override func viewDidAppear() {
-        super.viewDidAppear()
+// IBOutlets
+extension ViewController {
 
-        if loadedJSON == nil {
-
-            loadFile(fromURL: URL(fileURLWithPath: NSString(string: "/Users/cw/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false))
-//            showOpenPanel()
-        }
-    }
-
-    func showOpenPanel() {
+    @IBAction func showOpenPanel(_ sender: NSMenuItem) {
 
         // if loadedJSON is nil, show an open dialog
         let panel = NSOpenPanel()
@@ -101,7 +165,7 @@ class ViewController: NSViewController {
             let urls = panel.urls
 
             if let first = urls.first {
-                self.loadFile(fromURL: first)
+                self.loadFile(from: first)
             }
             if urls.count > 1 {
                 for url in urls.dropFirst() {
@@ -113,22 +177,17 @@ class ViewController: NSViewController {
         }
     }
 
-    func loadFile(fromURL url: URL) {
-
-        if let data = FileManager.default.contents(atPath: url.path) {
-            do {
-                representedObject = try JSONSerialization.jsonObject(with: data, options: [])
-            } catch let e {
-                Alert(type: .fileLoadError(e)).runModal()
-            }
-        }
+    @IBAction func selectPreviousLayer(_ sender: NSMenuItem) {
+        print("HI")
     }
 
-    override var representedObject: Any? {
-        didSet {
-            if let object = representedObject as? [String: AnyObject] {
-                loadedJSON = object
-            }
-        }
+    @IBAction func selectNextLayer(_ sender: NSMenuItem) {
+        print("HI")
+    }
+
+    @IBAction func save(_ sender: NSMenuItem) {
+
+        guard let readURL = readURL else { return } // todo pop save panels
+        saveFile(to: readURL)
     }
 }

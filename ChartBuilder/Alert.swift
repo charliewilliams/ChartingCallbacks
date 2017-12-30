@@ -12,19 +12,25 @@ class Alert: NSAlert {
 
     enum AlertType {
         case fileLoadError(_: Error?)
+        case fileSaveError(_: Error?)
     }
 
     init(type: AlertType) {
         super.init()
 
-        messageText = Text.fileLoadErrorMessage
-
         switch type {
         case .fileLoadError(let e):
+            messageText = Text.fileLoadErrorMessage
+            if let e = e {
+                informativeText = e.localizedDescription
+            }
+        case .fileSaveError(let e):
+            messageText = Text.fileSaveErrorMessage
             if let e = e {
                 informativeText = e.localizedDescription
             }
         }
+
         alertStyle = .warning
         addButton(withTitle: Text.ok)
         runModal()

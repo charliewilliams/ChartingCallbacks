@@ -21,5 +21,6 @@ enum Keys: String {
 struct Text {
     static var ok: String { return "OK" }
     static var fileOpenMessage: String { return "Open one or more files, or a folder" }
-    static var fileLoadErrorMessage: String { return "Badly structured JSON file!" }
+    static var fileLoadErrorMessage: String { return "Error: Badly structured JSON file" }
+    static var fileSaveErrorMessage: String { return "Error: Couldn't write to file" }
 }
