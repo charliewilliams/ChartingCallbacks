@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C060E3071FF43038005EDF8B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3061FF43038005EDF8B /* main.swift */; };
 		C060E3121FF44B5E005EDF8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3111FF44B5E005EDF8B /* AppDelegate.swift */; };
 		C060E3141FF44B5E005EDF8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3131FF44B5E005EDF8B /* ViewController.swift */; };
 		C060E3161FF44B5E005EDF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060E3151FF44B5E005EDF8B /* Assets.xcassets */; };
@@ -19,6 +18,8 @@
 		C060E35D1FF6D307005EDF8B /* TinyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E35C1FF6D307005EDF8B /* TinyLabel.swift */; };
 		C060E35F1FF6D483005EDF8B /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E35E1FF6D483005EDF8B /* Layout.swift */; };
 		C060E3611FF6EF4D005EDF8B /* Degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3601FF6EF4D005EDF8B /* Degrees.swift */; };
+		C060E3651FF73F58005EDF8B /* Bracket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3641FF73F58005EDF8B /* Bracket.swift */; };
+		C060E3671FF74186005EDF8B /* BigLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3661FF74186005EDF8B /* BigLabel.swift */; };
 		C09364F21FF2E81400B9442C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F11FF2E81400B9442C /* main.swift */; };
 		C09364F91FF2ED3200B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
 		C09364FB1FF2EE1F00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
@@ -40,15 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C060E3021FF43038005EDF8B /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 		C09364EC1FF2E81400B9442C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -61,8 +53,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C060E3041FF43038005EDF8B /* ChartMaker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ChartMaker; sourceTree = BUILT_PRODUCTS_DIR; };
-		C060E3061FF43038005EDF8B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C060E30F1FF44B5E005EDF8B /* ChartBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChartBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C060E3111FF44B5E005EDF8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C060E3131FF44B5E005EDF8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +68,8 @@
 		C060E35C1FF6D307005EDF8B /* TinyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinyLabel.swift; sourceTree = "<group>"; };
 		C060E35E1FF6D483005EDF8B /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		C060E3601FF6EF4D005EDF8B /* Degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degrees.swift; sourceTree = "<group>"; };
+		C060E3641FF73F58005EDF8B /* Bracket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bracket.swift; sourceTree = "<group>"; };
+		C060E3661FF74186005EDF8B /* BigLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigLabel.swift; sourceTree = "<group>"; };
 		C09364EE1FF2E81400B9442C /* CallbacksFinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CallbacksFinder; sourceTree = BUILT_PRODUCTS_DIR; };
 		C09364F11FF2E81400B9442C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		C09364F81FF2ED3200B9442C /* TokenGrouper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGrouper.swift; sourceTree = "<group>"; };
@@ -90,13 +82,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C060E3011FF43038005EDF8B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C060E30C1FF44B5E005EDF8B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,21 +113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C060E3051FF43038005EDF8B /* ChartMaker */ = {
-			isa = PBXGroup;
-			children = (
-				C060E3061FF43038005EDF8B /* main.swift */,
-			);
-			path = ChartMaker;
-			sourceTree = "<group>";
-		};
 		C060E3101FF44B5E005EDF8B /* ChartBuilder */ = {
 			isa = PBXGroup;
 			children = (
 				C060E3111FF44B5E005EDF8B /* AppDelegate.swift */,
 				C060E3131FF44B5E005EDF8B /* ViewController.swift */,
+				C060E3641FF73F58005EDF8B /* Bracket.swift */,
 				C060E35A1FF6D0C8005EDF8B /* Alert.swift */,
 				C060E35C1FF6D307005EDF8B /* TinyLabel.swift */,
+				C060E3661FF74186005EDF8B /* BigLabel.swift */,
 				C060E3601FF6EF4D005EDF8B /* Degrees.swift */,
 				C060E35E1FF6D483005EDF8B /* Layout.swift */,
 				C060E3151FF44B5E005EDF8B /* Assets.xcassets */,
@@ -166,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				C09364F01FF2E81400B9442C /* CallbacksFinder */,
-				C060E3051FF43038005EDF8B /* ChartMaker */,
 				C060E3101FF44B5E005EDF8B /* ChartBuilder */,
 				C09365011FF2EF5800B9442C /* UnitTests */,
 				C060E3231FF44B5E005EDF8B /* ChartBuilderTests */,
@@ -179,7 +157,6 @@
 			children = (
 				C09364EE1FF2E81400B9442C /* CallbacksFinder */,
 				C09365001FF2EF5800B9442C /* UnitTests.xctest */,
-				C060E3041FF43038005EDF8B /* ChartMaker */,
 				C060E30F1FF44B5E005EDF8B /* ChartBuilder.app */,
 				C060E3201FF44B5E005EDF8B /* ChartBuilderTests.xctest */,
 			);
@@ -211,23 +188,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C060E3031FF43038005EDF8B /* ChartMaker */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C060E3081FF43038005EDF8B /* Build configuration list for PBXNativeTarget "ChartMaker" */;
-			buildPhases = (
-				C060E3001FF43038005EDF8B /* Sources */,
-				C060E3011FF43038005EDF8B /* Frameworks */,
-				C060E3021FF43038005EDF8B /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ChartMaker;
-			productName = ChartMaker;
-			productReference = C060E3041FF43038005EDF8B /* ChartMaker */;
-			productType = "com.apple.product-type.tool";
-		};
 		C060E30E1FF44B5E005EDF8B /* ChartBuilder */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C060E3271FF44B5E005EDF8B /* Build configuration list for PBXNativeTarget "ChartBuilder" */;
@@ -307,10 +267,6 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Charlie Williams";
 				TargetAttributes = {
-					C060E3031FF43038005EDF8B = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-					};
 					C060E30E1FF44B5E005EDF8B = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -349,7 +305,6 @@
 			projectRoot = "";
 			targets = (
 				C09364ED1FF2E81400B9442C /* CallbacksFinder */,
-				C060E3031FF43038005EDF8B /* ChartMaker */,
 				C09364FF1FF2EF5800B9442C /* UnitTests */,
 				C060E30E1FF44B5E005EDF8B /* ChartBuilder */,
 				C060E31F1FF44B5E005EDF8B /* ChartBuilderTests */,
@@ -384,14 +339,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C060E3001FF43038005EDF8B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C060E3071FF43038005EDF8B /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C060E30B1FF44B5E005EDF8B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -400,7 +347,9 @@
 				C060E35D1FF6D307005EDF8B /* TinyLabel.swift in Sources */,
 				C060E3591FF6CE88005EDF8B /* Keys.swift in Sources */,
 				C060E35B1FF6D0C8005EDF8B /* Alert.swift in Sources */,
+				C060E3671FF74186005EDF8B /* BigLabel.swift in Sources */,
 				C060E3611FF6EF4D005EDF8B /* Degrees.swift in Sources */,
+				C060E3651FF73F58005EDF8B /* Bracket.swift in Sources */,
 				C060E3121FF44B5E005EDF8B /* AppDelegate.swift in Sources */,
 				C060E35F1FF6D483005EDF8B /* Layout.swift in Sources */,
 			);
@@ -459,26 +408,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C060E3091FF43038005EDF8B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N2WM6EN8GQ;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		C060E30A1FF43038005EDF8B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N2WM6EN8GQ;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
 		C060E3281FF44B5E005EDF8B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -700,15 +629,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C060E3081FF43038005EDF8B /* Build configuration list for PBXNativeTarget "ChartMaker" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C060E3091FF43038005EDF8B /* Debug */,
-				C060E30A1FF43038005EDF8B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C060E3271FF44B5E005EDF8B /* Build configuration list for PBXNativeTarget "ChartBuilder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
