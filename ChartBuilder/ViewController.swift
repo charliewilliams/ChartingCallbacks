@@ -21,10 +21,13 @@ class ViewController: NSViewController {
 
         readURL = url
         loadFile(from: url)
+        listenForKeyDown()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+
+        listenForKeyDown()
     }
 
     override func viewDidAppear() {
@@ -100,6 +103,8 @@ private extension ViewController {
                 toolbar.items[1].label = "2…\(maxValue) occurrences"
             }
         }
+
+        layOutBrackets()
     }
 
     func loadFile(from url: URL) {
@@ -165,6 +170,13 @@ private extension ViewController {
         perWordLabels = []
         brackets = []
     }
+
+    func listenForKeyDown() {
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
+            self.keyDown(with: $0)
+            return $0
+        }
+    }
 }
 
 // IBOutlets
@@ -198,14 +210,14 @@ extension ViewController {
     }
 
     @IBAction func minCallbackLengthChanged(_ sender: NSMenuItem) {
-        sliderValueDidChange()
+        layOutBrackets()
     }
 
     @IBAction func minOccurrenceCountChanged(_ sender: NSMenuItem) {
-        sliderValueDidChange()
+        layOutBrackets()
     }
 
-    func sliderValueDidChange() {
+    func layOutBrackets() {
 
         // refresh toolbar
         if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
@@ -213,15 +225,21 @@ extension ViewController {
             let minOccurrencesSlider = toolbar.items[1].view as? NSSlider {
 
             var nextLabelX: CGFloat = 0
+            var nextLabelY: CGFloat = 0
 
             for bracket in brackets {
 
                 let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLengthSlider.integerValue
                 let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
 
-                bracket.isHidden = hiddenByLength || hiddenByCount
+                bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
 
                 if !bracket.isHidden {
+//                    if nextLabelY + bracket.mainLabel.bounds.width > bracket.bounds.width {
+//                        nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
+//                        nextLabelX = 0
+//                    }
+//                    bracket.mainLabelY = nextLabelY
                     bracket.mainLabelX = nextLabelX
                     nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
                 }
@@ -241,5 +259,22 @@ extension ViewController {
 
         guard let readURL = readURL else { return } // todo pop save panels
         saveFile(to: readURL)
+    }
+
+    override func keyDown(with event: NSEvent) {
+
+        if let key = event.characters, key == "x" {
+            brackets.forEach {
+                if $0.isSelected {
+                    $0.manuallyHidden = true
+//                    if var layout = json?[Keys.layout.rawValue]?[$0.phrase] as? [String: Any] {
+//                        layout["hidden"] = true
+//                    } else {
+//                        json?[Keys.layout.rawValue]?[$0.phrase] = ["hidden": true]
+//                    }
+                }
+            }
+            layOutBrackets()
+        }
     }
 }

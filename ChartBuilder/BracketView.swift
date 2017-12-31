@@ -13,6 +13,18 @@ class BracketView: NSView {
     let phrase: String
     let indices: [Int]
     let mainLabel: NSTextView
+    var manuallyHidden: Bool = false
+    var isSelected: Bool = false {
+        didSet {
+            mainLabel.layer?.borderColor = isSelected ? NSColor.red.cgColor : nil
+            mainLabel.layer?.borderWidth = isSelected ? 1 : 0
+
+            if isSelected {
+                NotificationCenter.default.post(Notification(name: bracketSelectedNotification, object: self))
+            }
+        }
+    }
+    override var isSelectable: Bool { return true }
     var color: NSColor = .red
     var mainLabelX: CGFloat = 0 {
         didSet {
@@ -25,6 +37,9 @@ class BracketView: NSView {
     private let totalWordCount: Int
     private var bezierPaths: [NSBezierPath] = []
     private var mainLabelLeadingConstraint: NSLayoutConstraint?
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     init(phrase: String, indices: [Int], totalWordCount: Int, layout: [String: AnyObject]?) {
 
@@ -38,6 +53,7 @@ class BracketView: NSView {
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainLabel)
         addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 0.25, constant: 0))
+        NotificationCenter.default.addObserver(self, selector: #selector(didSelectBracket(_:)), name: bracketSelectedNotification, object: nil)
     }
 
     required init?(coder decoder: NSCoder) {
@@ -82,5 +98,13 @@ class BracketView: NSView {
 
             return path
         }
+    }
+
+    let bracketSelectedNotification = Notification.Name("bracketSelectedNotification")
+    @objc func didSelectBracket(_ note: Notification) {
+
+        guard let bracket = note.object as? BracketView, bracket != self else { return }
+
+        isSelected = false
     }
 }

@@ -33,4 +33,11 @@ class BigLabel: NSTextView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override func mouseDown(with event: NSEvent) {
+
+        if let bracket = superview as? BracketView {
+            bracket.isSelected = !bracket.isSelected
+        }
+    }
 }
