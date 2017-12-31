@@ -15,6 +15,8 @@ class ViewController: NSViewController {
     var brackets: [BracketView] = []
     var json: [String: AnyObject]?
     var readURL: URL?
+//    @IBOutlet weak var minCallbackLengthSlider: NSSlider!
+//    @IBOutlet weak var minOccurrenceCountSlider: NSSlider!
 
     init(url: URL) {
         super.init(nibName: nil, bundle: nil)
@@ -35,7 +37,6 @@ class ViewController: NSViewController {
             loadFile(from: URL(fileURLWithPath: NSString(string: "/Users/cw/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false))
 //            showOpenPanel()
         }
-
     }
 }
 
@@ -66,13 +67,13 @@ private extension ViewController {
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
 
-            guard let word = callback.keys.first,
+            guard let key = callback.keys.first,
                 let indices = callback.values.first else {
                     continue
             }
 
             // if existing layout info exists, set it on each view
-            let bracket = BracketView(word: word, indices: indices, wordCount: fullText.count, layout: layout?[word])
+            let bracket = BracketView(phrase: key, indices: indices, totalWordCount: fullText.count, layout: layout?[key])
             bracket.color = AppColor.number(index)
             view.addSubview(bracket)
 
@@ -84,11 +85,27 @@ private extension ViewController {
 
             brackets.append(bracket)
         }
+
+        // refresh toolbar
+        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1 {
+            let minLengthSlider = toolbar.items[0].view as! NSSlider
+            let minOccurrencesSlider = toolbar.items[1].view as! NSSlider
+
+            if let mostWordyPhrase = analysis.sorted(by: { $0.keys.first?.components(separatedBy: " ").count ?? 0 > $1.keys.first?.components(separatedBy: " ").count ?? 0 }).first?.keys.first {
+                let maxValue = mostWordyPhrase.components(separatedBy: " ").count
+                minLengthSlider.maxValue = Double(maxValue)
+            }
+
+            if let maxValue = analysis.sorted(by: { $0.values.first?.count ?? 0 > $1.values.first?.count ?? 0 }).first?.values.first?.count {
+                minOccurrencesSlider.maxValue = Double(maxValue)
+            }
+        }
     }
 
     func loadFile(from url: URL) {
 
         readURL = url
+        view.window?.title = url.deletingPathExtension().lastPathComponent
 
         if let data = FileManager.default.contents(atPath: url.path) {
             do {
@@ -176,6 +193,31 @@ extension ViewController {
                     newWindow.contentViewController = ViewController(url: url)
                     newWindow.becomeKey()
                 }
+            }
+        }
+    }
+
+    @IBAction func minCallbackLengthChanged(_ sender: NSMenuItem) {
+        sliderValueDidChange()
+    }
+
+    @IBAction func minOccurrenceCountChanged(_ sender: NSMenuItem) {
+        sliderValueDidChange()
+    }
+
+    func sliderValueDidChange() {
+
+        // refresh toolbar
+        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1 {
+            let minLengthSlider = toolbar.items[0].view as! NSSlider
+            let minOccurrencesSlider = toolbar.items[1].view as! NSSlider
+
+            for bracket in brackets {
+
+                let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLengthSlider.integerValue
+                let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
+
+                bracket.isHidden = hiddenByLength || hiddenByCount
             }
         }
     }

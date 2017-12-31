@@ -139,17 +139,51 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="76" y="-144"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Callbacks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
+                    <window key="window" title="New Chart" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="800" height="400"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="E003A234-82BB-417C-9195-20FF8E10B4D6" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="3GG-hA-3wC">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="AE425FA6-74C7-4AE7-9175-8D32A83BC549" label="Min Callback Length" paletteLabel="Min Callback Length" id="HBC-R8-X3V">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="21"/>
+                                    <size key="maxSize" width="150" height="21"/>
+                                    <slider key="view" verticalHuggingPriority="750" id="tRg-ou-Uxu">
+                                        <rect key="frame" x="9" y="14" width="96" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="100" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="jlX-uL-1St"/>
+                                    </slider>
+                                    <connections>
+                                        <action selector="minCallbackLengthChanged:" target="Oky-zY-oP4" id="ltc-t7-R0S"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="988517E4-B7B0-406B-8182-94F0980BEA3C" label="Min Number of Occurrences" paletteLabel="Min # of Occurrences" id="CXy-9o-CDl">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="96" height="21"/>
+                                    <size key="maxSize" width="150" height="21"/>
+                                    <slider key="view" verticalHuggingPriority="750" id="ymr-48-vF1">
+                                        <rect key="frame" x="13" y="14" width="96" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" minValue="1" maxValue="100" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="ZfA-Jt-g29"/>
+                                    </slider>
+                                    <connections>
+                                        <action selector="minOccurrenceCountChanged:" target="Oky-zY-oP4" id="AJY-yB-Yl8"/>
+                                    </connections>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="HBC-R8-X3V"/>
+                                <toolbarItem reference="CXy-9o-CDl"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -173,7 +207,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="736"/>
         </scene>
     </scenes>
 </document>

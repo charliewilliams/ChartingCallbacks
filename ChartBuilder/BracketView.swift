@@ -10,20 +10,20 @@ import Cocoa
 
 class BracketView: NSView {
 
-    private let word: String
-    private let wordCount: Int
-    private let indices: [Int]
-    let mainLabel: NSTextView
-    var bezierPaths: [NSBezierPath] = []
+    let phrase: String
+    let indices: [Int]
+    private let totalWordCount: Int
+    private let mainLabel: NSTextView
+    private var bezierPaths: [NSBezierPath] = []
     var color: NSColor = .red
     var mainLabelPosition = CGPoint(x: 0.5, y: 0.15)
 
-    init(word: String, indices: [Int], wordCount: Int, layout: [String: AnyObject]?) {
+    init(phrase: String, indices: [Int], totalWordCount: Int, layout: [String: AnyObject]?) {
 
-        self.word = word
+        self.phrase = phrase
         self.indices = indices
-        self.wordCount = wordCount
-        mainLabel = BigLabel(string: word)
+        self.totalWordCount = totalWordCount
+        mainLabel = BigLabel(string: phrase)
 
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +73,7 @@ class BracketView: NSView {
     private func buildBezierPaths() {
 
         let endPoint = CGPoint(x: mainLabel.frame.midX, y: mainLabel.frame.minY)
-        let xPerIndex = bounds.width / CGFloat(wordCount)
+        let xPerIndex = bounds.width / CGFloat(totalWordCount)
 
         bezierPaths = indices.map { (index) -> NSBezierPath in
 
