@@ -23,6 +23,7 @@ class TinyLabel: NSTextView {
         translatesAutoresizingMaskIntoConstraints = false
         frameRotation = 90
         alignment = .right
+        isSelectable = false
     }
 
     override init(frame frameRect: NSRect, textContainer container: NSTextContainer?) {

@@ -22,6 +22,7 @@ class BigLabel: NSTextView {
         font = NSFont.systemFont(ofSize: 48)
         translatesAutoresizingMaskIntoConstraints = false
         alignment = .center
+        isSelectable = false
     }
 
     override init(frame frameRect: NSRect, textContainer container: NSTextContainer?) {
