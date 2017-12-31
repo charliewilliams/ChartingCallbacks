@@ -11,9 +11,9 @@ import Foundation
 struct Layout {
 
     static var leftMargin: CGFloat { return 0 }
-    static var tinyWordHorizontalSpacing: CGFloat { return 10 }
+    static var tinyWordHorizontalSpacing: CGFloat { return 8 }
     static var tinyWordLeftPadding: CGFloat { return 20 }
     static var tinyWordBottomPadding: CGFloat { return 0 }
-    static var bracketStartY: CGFloat { return 120 }
+    static var bracketStartY: CGFloat { return Layout.tinyWordHorizontalSpacing * 10 }
     static var bigLabelTopPadding: CGFloat { return 120 }
 }

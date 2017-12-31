@@ -11,7 +11,7 @@ import Cocoa
 class TinyLabel: NSTextView {
 
     override var intrinsicContentSize: NSSize {
-        return NSSize(width: 100, height: 10)
+        return NSSize(width: Layout.tinyWordHorizontalSpacing * 10, height: Layout.tinyWordHorizontalSpacing)
     }
 
     init(string: String) {
@@ -19,7 +19,7 @@ class TinyLabel: NSTextView {
 
         self.string = string
 
-        font = NSFont.systemFont(ofSize: 8)
+        font = NSFont.systemFont(ofSize: Layout.tinyWordHorizontalSpacing * 0.8)
         translatesAutoresizingMaskIntoConstraints = false
         frameRotation = 90
         alignment = .right
