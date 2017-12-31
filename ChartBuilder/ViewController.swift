@@ -92,10 +92,12 @@ private extension ViewController {
             if let mostWordyPhrase = analysis.sorted(by: { $0.keys.first?.components(separatedBy: " ").count ?? 0 > $1.keys.first?.components(separatedBy: " ").count ?? 0 }).first?.keys.first {
                 let maxValue = mostWordyPhrase.components(separatedBy: " ").count
                 minLengthSlider.maxValue = Double(maxValue)
+                toolbar.items[0].label = "1…\(maxValue) words"
             }
 
             if let maxValue = analysis.sorted(by: { $0.values.first?.count ?? 0 > $1.values.first?.count ?? 0 }).first?.values.first?.count {
                 minOccurrencesSlider.maxValue = Double(maxValue)
+                toolbar.items[1].label = "2…\(maxValue) occurrences"
             }
         }
     }
