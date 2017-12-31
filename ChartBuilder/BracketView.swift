@@ -11,22 +11,27 @@ import Cocoa
 class BracketView: NSView {
 
     private let word: String
+    private let wordCount: Int
     private let indices: [Int]
     let mainLabel: NSTextView
     var bezierPaths: [NSBezierPath] = []
     var color: NSColor = .red
-    var mainLabelPosition = CGPoint(x: 0.5, y: 0.5)
+    var mainLabelPosition = CGPoint(x: 0.5, y: 0.15)
 
-    init(word: String, indices: [Int], layout: [String: AnyObject]?) {
+    init(word: String, indices: [Int], wordCount: Int, layout: [String: AnyObject]?) {
 
         self.word = word
         self.indices = indices
+        self.wordCount = wordCount
         mainLabel = BigLabel(string: word)
 
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainLabel)
+
+        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: mainLabelPosition.x * 2, constant: 0))
+        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: mainLabelPosition.y * 2, constant: 0))
 
         if let layout = layout {
             if let labelPosition = layout[Keys.labelPosition.rawValue] as? CGPoint {
@@ -60,6 +65,10 @@ class BracketView: NSView {
         NSColor.orange.setFill()
         dirtyRect.fill()
 
+        if bezierPaths.isEmpty {
+            buildBezierPaths()
+        }
+
         // Draw bezier paths
         for path in bezierPaths {
             color.set()
@@ -73,15 +82,18 @@ class BracketView: NSView {
     private func buildBezierPaths() {
 
         let endPoint = CGPoint(x: mainLabel.frame.midX, y: mainLabel.frame.minY)
+        let xPerIndex = bounds.width / CGFloat(wordCount)
 
         bezierPaths = indices.map { (index) -> NSBezierPath in
 
-            let start = CGPoint(x: CGFloat(index) / bounds.width, y: 0)
+            let start = CGPoint(x: xPerIndex * CGFloat(index) / bounds.width, y: 0)
 
             // for now just a line to the main label's bottom center point
             let path = NSBezierPath()
             path.move(to: start)
             path.line(to: endPoint)
+
+            path.lineWidth = 5
 
             return path
         }

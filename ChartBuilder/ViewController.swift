@@ -44,17 +44,15 @@ private extension ViewController {
 
     func redraw() {
 
-        guard let json = json else { return }
-
-        // draw to screen
-        guard let fullText = json[Keys.fullText.rawValue] as? [String],
+        guard let json = json,
+            let fullText = json[Keys.fullText.rawValue] as? [String],
             let analysis = json[Keys.analysis.rawValue]?.firstObject as? [String: [Int]] else {
                 Alert(type: .fileLoadError(nil)).runModal()
                 return
         }
 
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
-        let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count + 1) + Layout.tinyWordLeftPadding
+        let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
 
         // tiny words of full text along the bottom
         for (index, word) in fullText.enumerated() {
@@ -70,7 +68,7 @@ private extension ViewController {
         for (word, indices) in analysis {
 
             // if existing layout info exists, set it on each view
-            let bracket = BracketView(word: word, indices: indices, layout: layout?[word])
+            let bracket = BracketView(word: word, indices: indices, wordCount: fullText.count, layout: layout?[word])
             view.addSubview(bracket)
 
             let views = ["bracket": bracket]
