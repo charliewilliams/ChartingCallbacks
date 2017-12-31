@@ -31,7 +31,6 @@ class BracketView: NSView {
             mainLabelLeadingConstraint?.isActive = false
             mainLabelLeadingConstraint = NSLayoutConstraint(item: mainLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: mainLabelX)
             mainLabelLeadingConstraint?.isActive = true
-            layout()
         }
     }
     private let totalWordCount: Int

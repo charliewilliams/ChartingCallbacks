@@ -192,7 +192,7 @@ extension ViewController {
         panel.directoryURL = URL(fileURLWithPath: NSString(string: "~/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false)
         panel.begin { response in
 
-            guard response == NSApplication.ModalResponse.OK else { return }
+            guard response == .OK else { return }
 
             let urls = panel.urls
 
@@ -203,7 +203,6 @@ extension ViewController {
                 for url in urls.dropFirst() {
                     let newWindow = NSWindow()
                     newWindow.contentViewController = ViewController(url: url)
-                    newWindow.becomeKey()
                 }
             }
         }
