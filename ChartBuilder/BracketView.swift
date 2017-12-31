@@ -86,7 +86,7 @@ class BracketView: NSView {
 
         bezierPaths = indices.map { (index) -> NSBezierPath in
 
-            let start = CGPoint(x: xPerIndex * CGFloat(index) / bounds.width, y: 0)
+            let start = CGPoint(x: xPerIndex * CGFloat(index), y: 0)
 
             // for now just a line to the main label's bottom center point
             let path = NSBezierPath()
