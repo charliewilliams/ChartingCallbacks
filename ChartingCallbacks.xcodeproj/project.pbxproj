@@ -29,6 +29,7 @@
 		C093650D1FF3098E00B9442C /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C093650C1FF3098E00B9442C /* StringTests.swift */; };
 		C093650E1FF30A1A00B9442C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364FA1FF2EE1F00B9442C /* String.swift */; };
 		C093650F1FF30BE400B9442C /* TokenGrouper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09364F81FF2ED3200B9442C /* TokenGrouper.swift */; };
+		C0E95B3E1FF992F900C782A0 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E95B3D1FF992F900C782A0 /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		C09365041FF2EF5800B9442C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C09365081FF2EF6700B9442C /* TokenGrouperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenGrouperTests.swift; sourceTree = "<group>"; };
 		C093650C1FF3098E00B9442C /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		C0E95B3D1FF992F900C782A0 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				C060E3111FF44B5E005EDF8B /* AppDelegate.swift */,
 				C060E3131FF44B5E005EDF8B /* ViewController.swift */,
 				C060E36A1FF875F8005EDF8B /* NSColor.swift */,
+				C0E95B3D1FF992F900C782A0 /* String.swift */,
 				C060E3641FF73F58005EDF8B /* BracketView.swift */,
 				C060E35A1FF6D0C8005EDF8B /* Alert.swift */,
 				C060E35C1FF6D307005EDF8B /* TinyLabel.swift */,
@@ -347,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C060E3141FF44B5E005EDF8B /* ViewController.swift in Sources */,
+				C0E95B3E1FF992F900C782A0 /* String.swift in Sources */,
 				C060E35D1FF6D307005EDF8B /* TinyLabel.swift in Sources */,
 				C060E3591FF6CE88005EDF8B /* Keys.swift in Sources */,
 				C060E35B1FF6D0C8005EDF8B /* Alert.swift in Sources */,

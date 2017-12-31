@@ -16,4 +16,5 @@ struct Layout {
     static var tinyWordBottomPadding: CGFloat { return 0 }
     static var bracketStartY: CGFloat { return Layout.tinyWordHorizontalSpacing * 10 }
     static var bigLabelTopPadding: CGFloat { return 120 }
+    static var perMainLabelSpacing: CGFloat { return 20 }
 }

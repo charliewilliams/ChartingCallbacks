@@ -12,11 +12,19 @@ class BracketView: NSView {
 
     let phrase: String
     let indices: [Int]
-    private let totalWordCount: Int
-    private let mainLabel: NSTextView
-    private var bezierPaths: [NSBezierPath] = []
+    let mainLabel: NSTextView
     var color: NSColor = .red
-    var mainLabelPosition = CGPoint(x: 0.5, y: 0.15)
+    var mainLabelX: CGFloat = 0 {
+        didSet {
+            mainLabelLeadingConstraint?.isActive = false
+            mainLabelLeadingConstraint = NSLayoutConstraint(item: mainLabel, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1.0, constant: mainLabelX)
+            mainLabelLeadingConstraint?.isActive = true
+            layout()
+        }
+    }
+    private let totalWordCount: Int
+    private var bezierPaths: [NSBezierPath] = []
+    private var mainLabelLeadingConstraint: NSLayoutConstraint?
 
     init(phrase: String, indices: [Int], totalWordCount: Int, layout: [String: AnyObject]?) {
 
@@ -29,21 +37,7 @@ class BracketView: NSView {
         translatesAutoresizingMaskIntoConstraints = false
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainLabel)
-
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: mainLabelPosition.x * 2, constant: 0))
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: mainLabelPosition.y * 2, constant: 0))
-
-        if let layout = layout {
-            if let labelPosition = layout[Keys.labelPosition.rawValue] as? CGPoint {
-                mainLabelPosition = labelPosition
-            }
-            if let color = layout[Keys.color.rawValue] as? NSColor {
-                self.color = color
-            }
-            if let alpha = layout[Keys.alpha.rawValue] as? CGFloat {
-                alphaValue = alpha
-            }
-        }
+        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 0.25, constant: 0))
     }
 
     required init?(coder decoder: NSCoder) {

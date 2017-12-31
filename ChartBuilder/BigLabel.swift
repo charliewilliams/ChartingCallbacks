@@ -11,13 +11,14 @@ import Cocoa
 class BigLabel: NSTextView {
 
     override var intrinsicContentSize: NSSize {
-        return NSSize(width: 200, height: 100)
+        let width = string.width(withConstrainedHeight: 60, font: font!)
+        return NSSize(width: width * 1.2, height: 60)
     }
 
     init(string: String) {
         super.init(frame: .zero)
 
-        self.string = string
+        self.string = "\"\(string)\""
 
         font = NSFont.systemFont(ofSize: 48)
         translatesAutoresizingMaskIntoConstraints = false

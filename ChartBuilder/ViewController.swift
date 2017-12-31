@@ -15,8 +15,6 @@ class ViewController: NSViewController {
     var brackets: [BracketView] = []
     var json: [String: AnyObject]?
     var readURL: URL?
-//    @IBOutlet weak var minCallbackLengthSlider: NSSlider!
-//    @IBOutlet weak var minOccurrenceCountSlider: NSSlider!
 
     init(url: URL) {
         super.init(nibName: nil, bundle: nil)
@@ -87,9 +85,9 @@ private extension ViewController {
         }
 
         // refresh toolbar
-        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1 {
-            let minLengthSlider = toolbar.items[0].view as! NSSlider
-            let minOccurrencesSlider = toolbar.items[1].view as! NSSlider
+        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
+            let minLengthSlider = toolbar.items[0].view as? NSSlider,
+            let minOccurrencesSlider = toolbar.items[1].view as? NSSlider {
 
             if let mostWordyPhrase = analysis.sorted(by: { $0.keys.first?.components(separatedBy: " ").count ?? 0 > $1.keys.first?.components(separatedBy: " ").count ?? 0 }).first?.keys.first {
                 let maxValue = mostWordyPhrase.components(separatedBy: " ").count
@@ -208,9 +206,11 @@ extension ViewController {
     func sliderValueDidChange() {
 
         // refresh toolbar
-        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1 {
-            let minLengthSlider = toolbar.items[0].view as! NSSlider
-            let minOccurrencesSlider = toolbar.items[1].view as! NSSlider
+        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
+            let minLengthSlider = toolbar.items[0].view as? NSSlider,
+            let minOccurrencesSlider = toolbar.items[1].view as? NSSlider {
+
+            var nextLabelX: CGFloat = 0
 
             for bracket in brackets {
 
@@ -218,6 +218,11 @@ extension ViewController {
                 let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
 
                 bracket.isHidden = hiddenByLength || hiddenByCount
+
+                if !bracket.isHidden {
+                    bracket.mainLabelX = nextLabelX
+                    nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
+                }
             }
         }
     }
