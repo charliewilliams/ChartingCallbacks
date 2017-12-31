@@ -46,7 +46,7 @@ private extension ViewController {
 
         guard let json = json,
             let fullText = json[Keys.fullText.rawValue] as? [String],
-            let analysis = json[Keys.analysis.rawValue]?.firstObject as? [String: [Int]] else {
+            let analysis = json[Keys.analysis.rawValue] as? [[String: [Int]]] else {
                 Alert(type: .fileLoadError(nil)).runModal()
                 return
         }
@@ -65,10 +65,16 @@ private extension ViewController {
         }
 
         // for each 'callback' make a selectable bracket + label
-        for (word, indices) in analysis {
+        for (index, callback) in analysis.enumerated() {
+
+            guard let word = callback.keys.first,
+                let indices = callback.values.first else {
+                    continue
+            }
 
             // if existing layout info exists, set it on each view
             let bracket = BracketView(word: word, indices: indices, wordCount: fullText.count, layout: layout?[word])
+            bracket.color = AppColor.number(index)
             view.addSubview(bracket)
 
             let views = ["bracket": bracket]
