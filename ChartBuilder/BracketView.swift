@@ -33,9 +33,18 @@ class BracketView: NSView {
             mainLabelLeadingConstraint?.isActive = true
         }
     }
+    var mainLabelY: CGFloat = 0 {
+        didSet {
+            mainLabelTopConstraint?.isActive = false
+            mainLabelTopConstraint = NSLayoutConstraint(item: mainLabel, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1.0, constant: Layout.bigLabelTopPadding + mainLabelY)
+            mainLabelTopConstraint?.isActive = true
+        }
+    }
     private let totalWordCount: Int
     private var bezierPaths: [NSBezierPath] = []
     private var mainLabelLeadingConstraint: NSLayoutConstraint?
+    private var mainLabelTopConstraint: NSLayoutConstraint?
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -51,7 +60,9 @@ class BracketView: NSView {
         translatesAutoresizingMaskIntoConstraints = false
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainLabel)
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 0.25, constant: 0))
+        mainLabelTopConstraint = NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 0.25, constant: 0)
+        mainLabelTopConstraint?.isActive = true
+
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBracket(_:)), name: bracketSelectedNotification, object: nil)
     }
 

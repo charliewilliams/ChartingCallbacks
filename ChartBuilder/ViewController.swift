@@ -234,11 +234,11 @@ extension ViewController {
                 bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
 
                 if !bracket.isHidden {
-//                    if nextLabelY + bracket.mainLabel.bounds.width > bracket.bounds.width {
-//                        nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
-//                        nextLabelX = 0
-//                    }
-//                    bracket.mainLabelY = nextLabelY
+                    if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
+                        nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
+                        nextLabelX = 0
+                    }
+                    bracket.mainLabelY = nextLabelY
                     bracket.mainLabelX = nextLabelX
                     nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
                 }
