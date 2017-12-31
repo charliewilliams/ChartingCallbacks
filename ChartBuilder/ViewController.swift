@@ -36,7 +36,6 @@ class ViewController: NSViewController {
 //            showOpenPanel()
         }
 
-//        becomeFirstResponder()
     }
 }
 

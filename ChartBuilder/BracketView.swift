@@ -50,20 +50,7 @@ class BracketView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubtreeIfNeeded() {
-
-        mainLabel.removeConstraints(mainLabel.constraints)
-
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: mainLabelPosition.x * 2, constant: 0))
-        addConstraint(NSLayoutConstraint(item: mainLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: mainLabelPosition.y * 2, constant: 0))
-
-        super.layoutSubtreeIfNeeded()
-    }
-
     override func draw(_ dirtyRect: NSRect) {
-
-        NSColor.orange.setFill()
-        dirtyRect.fill()
 
         if bezierPaths.isEmpty {
             buildBezierPaths()
@@ -73,10 +60,14 @@ class BracketView: NSView {
         for path in bezierPaths {
             color.set()
             path.stroke()
+            path.fill()
         }
+    }
 
-        // Call super to draw subviews for free
-        super.draw(dirtyRect)
+    override func layout() {
+        super.layout()
+
+        buildBezierPaths()
     }
 
     private func buildBezierPaths() {
