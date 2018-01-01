@@ -25,7 +25,6 @@ class BracketView: NSView {
         }
     }
     override var isSelectable: Bool { return true }
-    var color: NSColor = .red
     var mainLabelX: CGFloat = 0 {
         didSet {
             mainLabelLeadingConstraint?.isActive = false
@@ -40,6 +39,7 @@ class BracketView: NSView {
             mainLabelTopConstraint?.isActive = true
         }
     }
+    private let color: NSColor
     private let totalWordCount: Int
     private var bezierPaths: [NSBezierPath] = []
     private var mainLabelLeadingConstraint: NSLayoutConstraint?
@@ -49,14 +49,16 @@ class BracketView: NSView {
         NotificationCenter.default.removeObserver(self)
     }
 
-    init(phrase: String, indices: [Int], totalWordCount: Int, layout: [String: AnyObject]?) {
+    init(phrase: String, indices: [Int], totalWordCount: Int, color: NSColor, layout: [String: AnyObject]?) {
 
         self.phrase = phrase
         self.indices = indices
         self.totalWordCount = totalWordCount
+        self.color = color
         mainLabel = BigLabel(string: phrase)
 
         super.init(frame: .zero)
+
         translatesAutoresizingMaskIntoConstraints = false
         mainLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(mainLabel)
@@ -71,6 +73,9 @@ class BracketView: NSView {
     }
 
     override func draw(_ dirtyRect: NSRect) {
+
+//        NSColor.orange.withAlphaComponent(0.1).setFill()
+//        dirtyRect.fill()
 
         if bezierPaths.isEmpty {
             buildBezierPaths()

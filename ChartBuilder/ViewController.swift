@@ -72,9 +72,7 @@ private extension ViewController {
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
 
-            // if existing layout info exists, set it on each view
-            let bracket = BracketView(phrase: callback.key, indices: callback.value, totalWordCount: fullText.count, layout: layout?[callback.key])
-            bracket.color = AppColor.number(index)
+            let bracket = BracketView(phrase: callback.key, indices: callback.value, totalWordCount: fullText.count, color: AppColor.number(index), layout: layout?[callback.key])
             view.addSubview(bracket)
 
             let views = ["bracket": bracket]
@@ -218,6 +216,8 @@ extension ViewController {
 
     @discardableResult func layOutBrackets() -> CGFloat {
 
+        view.layoutSubtreeIfNeeded()
+
         // refresh toolbar
         guard let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
             let minLengthSlider = toolbar.items[0].view as? NSSlider,
@@ -234,6 +234,7 @@ extension ViewController {
             let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
 
             bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
+
 
             if !bracket.isHidden {
                 if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
