@@ -48,8 +48,6 @@ private extension ViewController {
 
     func redraw() {
 
-        view.layout()
-
         guard let window = view.window,
             let json = json,
             let fullText = json[Keys.fullText.rawValue] as? [String],
@@ -60,8 +58,6 @@ private extension ViewController {
 
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
         let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
-
-        window.animator().setFrame(NSRect(origin: window.frame.origin, size: NSSize(width: totalWidth * 1.2, height: window.frame.height)), display: true)
 
         // tiny words of full text along the bottom
         for (index, word) in fullText.enumerated() {
@@ -107,7 +103,9 @@ private extension ViewController {
             }
         }
 
-        layOutBrackets()
+        let requiredHeight = layOutBrackets()
+        window.animator().setFrame(NSRect(origin: window.frame.origin, size: NSSize(width: totalWidth * 1.2, height: requiredHeight)), display: true)
+
     }
 
     func loadFile(from url: URL) {
@@ -127,12 +125,12 @@ private extension ViewController {
     func saveFile(to url: URL) {
 
         // save json
-        do {
-            let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
-            try data.write(to: url)
-        } catch let e {
-            Alert(type: .fileSaveError(e)).runModal()
-        }
+//        do {
+//            let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
+//            try data.write(to: url)
+//        } catch let e {
+//            Alert(type: .fileSaveError(e)).runModal()
+//        }
 
         // export pdf
         guard let bitmapRep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else {
@@ -218,34 +216,37 @@ extension ViewController {
         layOutBrackets()
     }
 
-    func layOutBrackets() {
+    @discardableResult func layOutBrackets() -> CGFloat {
 
         // refresh toolbar
-        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
+        guard let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
             let minLengthSlider = toolbar.items[0].view as? NSSlider,
-            let minOccurrencesSlider = toolbar.items[1].view as? NSSlider {
+            let minOccurrencesSlider = toolbar.items[1].view as? NSSlider else {
+                return 0
+        }
 
-            var nextLabelX: CGFloat = 0
-            var nextLabelY: CGFloat = 0
+        var nextLabelX: CGFloat = 0
+        var nextLabelY: CGFloat = 0
 
-            for bracket in brackets {
+        for bracket in brackets {
 
-                let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLengthSlider.integerValue
-                let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
+            let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLengthSlider.integerValue
+            let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
 
-                bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
+            bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
 
-                if !bracket.isHidden {
-                    if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
-                        nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
-                        nextLabelX = 0
-                    }
-                    bracket.mainLabelY = nextLabelY
-                    bracket.mainLabelX = nextLabelX
-                    nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
+            if !bracket.isHidden {
+                if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
+                    nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
+                    nextLabelX = 0
                 }
+                bracket.mainLabelY = nextLabelY
+                bracket.mainLabelX = nextLabelX
+                nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
             }
         }
+
+        return nextLabelY * 3 // this is annoyingly arbitrary
     }
 
     @IBAction func selectPreviousLayer(_ sender: NSMenuItem) {
