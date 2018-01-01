@@ -89,6 +89,7 @@ class BracketView: NSView {
         buildBezierPaths()
     }
 
+    private let curve = true
     private func buildBezierPaths() {
 
         let endPoint = CGPoint(x: mainLabel.frame.midX, y: mainLabel.frame.minY)
@@ -97,13 +98,24 @@ class BracketView: NSView {
         bezierPaths = indices.map { (index) -> NSBezierPath in
 
             let start = CGPoint(x: xPerIndex * CGFloat(index), y: 0)
-
-            // for now just a line to the main label's bottom center point
             let path = NSBezierPath()
-            path.move(to: start)
-            path.line(to: endPoint)
-
             path.lineWidth = 5
+            path.move(to: start)
+
+            if curve {
+
+                let isLeftOfMidpoint = start.x < endPoint.x / 2
+                let cp1XMult: CGFloat = isLeftOfMidpoint ? 1.2 : 0.8
+                let cp2XMult: CGFloat = isLeftOfMidpoint ? 0.8 : 1.2
+                let cp1 = CGPoint(x: start.x * cp1XMult, y: 150)
+                let cp2 = CGPoint(x: endPoint.x * cp2XMult, y: endPoint.y - 40)
+
+                path.curve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
+
+            } else {
+
+                path.line(to: endPoint)
+            }
 
             return path
         }
