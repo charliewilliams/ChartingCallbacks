@@ -27,16 +27,19 @@ class ViewController: NSViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
+        readURL = URL(fileURLWithPath: NSString(string: "/Users/cw/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false)
         listenForKeyDown()
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
 
-        if json == nil {
+        if json != nil { return }
 
-            loadFile(from: URL(fileURLWithPath: NSString(string: "/Users/cw/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false))
-//            showOpenPanel()
+        if let url = readURL {
+            loadFile(from: url)
+        } else {
+            showOpenPanel()
         }
     }
 }
@@ -45,7 +48,10 @@ private extension ViewController {
 
     func redraw() {
 
-        guard let json = json,
+        view.layout()
+
+        guard let window = view.window,
+            let json = json,
             let fullText = json[Keys.fullText.rawValue] as? [String],
             let analysis = json[Keys.analysis.rawValue] as? [String: [Int]] else {
                 Alert(type: .fileLoadError(nil)).runModal()
@@ -54,6 +60,8 @@ private extension ViewController {
 
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
         let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
+
+        window.animator().setFrame(NSRect(origin: window.frame.origin, size: NSSize(width: totalWidth * 1.2, height: window.frame.height)), display: true)
 
         // tiny words of full text along the bottom
         for (index, word) in fullText.enumerated() {
@@ -104,7 +112,6 @@ private extension ViewController {
 
     func loadFile(from url: URL) {
 
-        readURL = url
         view.window?.title = url.deletingPathExtension().lastPathComponent
 
         if let data = FileManager.default.contents(atPath: url.path) {
@@ -177,7 +184,7 @@ private extension ViewController {
 // IBOutlets
 extension ViewController {
 
-    @IBAction func showOpenPanel(_ sender: NSMenuItem) {
+    @IBAction func showOpenPanel(_ sender: NSMenuItem? = nil) {
 
         // if loadedJSON is nil, show an open dialog
         let panel = NSOpenPanel()
