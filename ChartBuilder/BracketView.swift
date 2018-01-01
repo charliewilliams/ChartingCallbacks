@@ -24,7 +24,6 @@ class BracketView: NSView {
             }
         }
     }
-    override var isSelectable: Bool { return true }
     var mainLabelX: CGFloat = 0 {
         didSet {
             mainLabelLeadingConstraint?.isActive = false
@@ -77,6 +76,12 @@ class BracketView: NSView {
 //        NSColor.orange.withAlphaComponent(0.1).setFill()
 //        dirtyRect.fill()
 
+        if isHidden {
+            NSColor.clear.setFill()
+            dirtyRect.fill()
+            return
+        }
+
         if bezierPaths.isEmpty {
             buildBezierPaths()
         }
@@ -109,11 +114,8 @@ class BracketView: NSView {
 
             if curve {
 
-                let isLeftOfMidpoint = start.x < endPoint.x / 2
-                let cp1XMult: CGFloat = isLeftOfMidpoint ? 1.2 : 0.8
-                let cp2XMult: CGFloat = isLeftOfMidpoint ? 0.8 : 1.2
-                let cp1 = CGPoint(x: start.x * cp1XMult, y: 150)
-                let cp2 = CGPoint(x: endPoint.x * cp2XMult, y: endPoint.y - 40)
+                let cp1 = CGPoint(x: start.x, y: 100)
+                let cp2 = CGPoint(x: endPoint.x, y: endPoint.y - 100)
 
                 path.curve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
 

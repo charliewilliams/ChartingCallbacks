@@ -235,7 +235,6 @@ extension ViewController {
 
             bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
 
-
             if !bracket.isHidden {
                 if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
                     nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
