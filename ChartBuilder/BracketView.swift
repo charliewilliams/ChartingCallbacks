@@ -80,7 +80,6 @@ class BracketView: NSView {
         for path in bezierPaths {
             color.set()
             path.stroke()
-            path.fill()
         }
     }
 
