@@ -47,7 +47,7 @@ private extension ViewController {
 
         guard let json = json,
             let fullText = json[Keys.fullText.rawValue] as? [String],
-            let analysis = json[Keys.analysis.rawValue] as? [[String: [Int]]] else {
+            let analysis = json[Keys.analysis.rawValue] as? [String: [Int]] else {
                 Alert(type: .fileLoadError(nil)).runModal()
                 return
         }
@@ -68,13 +68,8 @@ private extension ViewController {
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
 
-            guard let key = callback.keys.first,
-                let indices = callback.values.first else {
-                    continue
-            }
-
             // if existing layout info exists, set it on each view
-            let bracket = BracketView(phrase: key, indices: indices, totalWordCount: fullText.count, layout: layout?[key])
+            let bracket = BracketView(phrase: callback.key, indices: callback.value, totalWordCount: fullText.count, layout: layout?[callback.key])
             bracket.color = AppColor.number(index)
             view.addSubview(bracket)
 
@@ -92,15 +87,15 @@ private extension ViewController {
             let minLengthSlider = toolbar.items[0].view as? NSSlider,
             let minOccurrencesSlider = toolbar.items[1].view as? NSSlider {
 
-            if let mostWordyPhrase = analysis.sorted(by: { $0.keys.first?.components(separatedBy: " ").count ?? 0 > $1.keys.first?.components(separatedBy: " ").count ?? 0 }).first?.keys.first {
+            if let mostWordyPhrase = analysis.sorted(by: { $0.key.components(separatedBy: " ").count > $1.key.components(separatedBy: " ").count }).first?.key {
                 let maxValue = mostWordyPhrase.components(separatedBy: " ").count
                 minLengthSlider.maxValue = Double(maxValue)
                 toolbar.items[0].label = "1…\(maxValue) words"
             }
 
-            if let maxValue = analysis.sorted(by: { $0.values.first?.count ?? 0 > $1.values.first?.count ?? 0 }).first?.values.first?.count {
-                minOccurrencesSlider.maxValue = Double(maxValue)
-                toolbar.items[1].label = "2…\(maxValue) occurrences"
+            if let maxNumberOfOccurrences = analysis.sorted(by: { $0.value.count > $1.value.count }).first?.value.count {
+                minOccurrencesSlider.maxValue = Double(maxNumberOfOccurrences)
+                toolbar.items[1].label = "2…\(maxNumberOfOccurrences) occurrences"
             }
         }
 

@@ -50,7 +50,7 @@ sorter.run(progress: { (token, indices) in
     }
 
     do {
-        let serializable = output.map { [$0: Array($1) ] }
+        let serializable = output.mapValues({ Array($0) })
         var json: [String: Any] = [Keys.analysis.rawValue: serializable]
         json[Keys.fullText.rawValue] = tokens
         let outputString = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
