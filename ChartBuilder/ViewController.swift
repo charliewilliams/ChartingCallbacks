@@ -249,14 +249,6 @@ extension ViewController {
         return nextLabelY * 3 // this is annoyingly arbitrary
     }
 
-    @IBAction func selectPreviousLayer(_ sender: NSMenuItem) {
-        print("HI")
-    }
-
-    @IBAction func selectNextLayer(_ sender: NSMenuItem) {
-        print("HI")
-    }
-
     @IBAction func save(_ sender: NSMenuItem) {
 
         guard let readURL = readURL else { return } // todo pop save panels

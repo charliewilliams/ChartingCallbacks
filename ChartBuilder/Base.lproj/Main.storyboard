@@ -50,19 +50,6 @@
                                                 <action selector="showOpenPanel:" target="Ady-hI-5gd" id="FcD-RZ-Loo"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open Recent" id="tXI-mr-wws">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
-                                                <items>
-                                                    <menuItem title="Clear Menu" id="vNY-rz-j42">
-                                                        <modifierMask key="keyEquivalentModifierMask"/>
-                                                        <connections>
-                                                            <action selector="clearRecentDocuments:" target="Ady-hI-5gd" id="Daa-9d-B3U"/>
-                                                        </connections>
-                                                    </menuItem>
-                                                </items>
-                                            </menu>
-                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                                         <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                             <connections>
@@ -72,28 +59,6 @@
                                         <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                             <connections>
                                                 <action selector="save:" target="Ady-hI-5gd" id="VvJ-5g-dgk"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
-                                            <connections>
-                                                <action selector="saveDocumentAs:" target="Ady-hI-5gd" id="mDf-zr-I0C"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Revert to Saved" keyEquivalent="r" id="KaW-ft-85H">
-                                            <connections>
-                                                <action selector="revertDocumentToSaved:" target="Ady-hI-5gd" id="iJ3-Pv-kwq"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
-                                        <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="runPageLayout:" target="Ady-hI-5gd" id="Din-rz-gC5"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Print…" keyEquivalent="p" id="aTl-1u-JFS">
-                                            <connections>
-                                                <action selector="print:" target="Ady-hI-5gd" id="qaZ-4w-aoO"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -111,19 +76,6 @@
                                         <menuItem title="Redo" keyEquivalent="Z" id="6dh-zS-Vam">
                                             <connections>
                                                 <action selector="redo:" target="Ady-hI-5gd" id="oIA-Rs-6OD"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Br8-31-yr8"/>
-                                        <menuItem title="Previous layer" keyEquivalent="" id="SyM-17-3AN">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="selectPreviousLayer:" target="Ady-hI-5gd" id="cZJ-Bf-tO0"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Next layer" keyEquivalent="" id="ciu-el-8vM">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="selectNextLayer:" target="Ady-hI-5gd" id="AsZ-9c-Z5z"/>
                                             </connections>
                                         </menuItem>
                                     </items>
