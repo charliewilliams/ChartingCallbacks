@@ -71,15 +71,18 @@ class BracketView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private let debugFill = false
     override func draw(_ dirtyRect: NSRect) {
-
-//        NSColor.orange.withAlphaComponent(0.1).setFill()
-//        dirtyRect.fill()
 
         if isHidden {
             NSColor.clear.setFill()
             dirtyRect.fill()
             return
+        }
+
+        if debugFill {
+            NSColor.orange.withAlphaComponent(0.1).setFill()
+            dirtyRect.fill()
         }
 
         if bezierPaths.isEmpty {
