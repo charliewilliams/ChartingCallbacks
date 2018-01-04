@@ -13,7 +13,7 @@ class ViewController: NSViewController {
 
     var perWordLabels: [NSTextView] = []
     var brackets: [BracketView] = []
-    var json: [String: AnyObject]?
+    var json: [String: Any]?
     var readURL: URL?
 
     init(url: URL) {
@@ -123,12 +123,12 @@ private extension ViewController {
     func saveFile(to url: URL) {
 
         // save json
-//        do {
-//            let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
-//            try data.write(to: url)
-//        } catch let e {
-//            Alert(type: .fileSaveError(e)).runModal()
-//        }
+        do {
+            let data = try JSONSerialization.data(withJSONObject: json as Any, options: .prettyPrinted)
+            try data.write(to: url)
+        } catch let e {
+            Alert(type: .fileSaveError(e)).runModal()
+        }
 
         // export pdf
         guard let bitmapRep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else {
@@ -257,17 +257,23 @@ extension ViewController {
 
     override func keyDown(with event: NSEvent) {
 
-        if let key = event.characters, key == "x" {
+        if json?[Keys.layout.rawValue] == nil {
+            json?[Keys.layout.rawValue] = [:]
+        }
+
+        if let key = event.characters, key == "x",
+            var layouts = json?[Keys.layout.rawValue] as? [String: [String: Any]] {
             brackets.forEach {
                 if $0.isSelected {
                     $0.manuallyHidden = true
-//                    if var layout = json?[Keys.layout.rawValue]?[$0.phrase] as? [String: Any] {
-//                        layout["hidden"] = true
-//                    } else {
-//                        json?[Keys.layout.rawValue]?[$0.phrase] = ["hidden": true]
-//                    }
+                    if var layout = layouts[$0.phrase] {
+                        layout["hidden"] = true
+                    } else {
+                        layouts[$0.phrase] = ["hidden": true]
+                    }
                 }
             }
+            json?[Keys.layout.rawValue] = layouts
             layOutBrackets()
         }
     }

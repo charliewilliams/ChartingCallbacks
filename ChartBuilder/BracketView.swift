@@ -65,6 +65,10 @@ class BracketView: NSView {
         mainLabelTopConstraint?.isActive = true
 
         NotificationCenter.default.addObserver(self, selector: #selector(didSelectBracket(_:)), name: bracketSelectedNotification, object: nil)
+
+        if let layout = layout, layout["hidden"]?.boolValue == true {
+            manuallyHidden = true
+        }
     }
 
     required init?(coder decoder: NSCoder) {
