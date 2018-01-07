@@ -11,7 +11,6 @@ import Quartz
 
 class ViewController: NSViewController {
 
-    var perWordLabels: [NSTextView] = []
     enum Examples: String {
         case readme = "~/Developer/ComedyTokenizer/README-output.json"
         case izzard1 = "~/Developer/ComedyTokenizer/source json/Izzard-DefiniteArticle-output.json"
@@ -25,18 +24,11 @@ class ViewController: NSViewController {
     var json: [String: Any]?
     var readURL: URL?
 
-    init(url: URL) {
-        super.init(nibName: nil, bundle: nil)
-
-        readURL = url
-        loadFile(from: url)
-        listenForKeyDown()
-    }
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
-        readURL = URL(fileURLWithPath: NSString(string: "/Users/cw/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false)
+        readURL = Examples.readme.url
+//        readURL = Examples.izzard1.url
         listenForKeyDown()
     }
 
@@ -68,14 +60,22 @@ private extension ViewController {
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
         let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
 
-        // tiny words of full text along the bottom
-        for (index, word) in fullText.enumerated() {
+        autoreleasepool {
 
-            let label = TinyLabel(string: word)
-            view.addSubview(label)
-            view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
-            view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
-            perWordLabels.append(label)
+            // tiny words of full text along the bottom
+            for (index, word) in fullText.enumerated() {
+
+                autoreleasepool {
+
+                    let label = TinyLabel(string: word)
+                    view.addSubview(label)
+                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
+                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
+                }
+            }
+
+            view.layoutSubtreeIfNeeded()
+            replaceTinyLabelsWithSnapshot(width: totalWidth)
         }
 
         // for each 'callback' make a selectable bracket + label
@@ -111,7 +111,7 @@ private extension ViewController {
         }
 
         let requiredHeight = layOutBrackets()
-        window.animator().setFrame(NSRect(origin: window.frame.origin, size: NSSize(width: totalWidth * 1.2, height: requiredHeight)), display: true)
+        window.animator().setFrame(NSRect(origin: window.frame.origin, size: NSSize(width: totalWidth + Layout.tinyWordLeftPadding, height: requiredHeight)), display: true)
 
     }
 
@@ -168,17 +168,14 @@ private extension ViewController {
 
     func reset() {
 
-        for label in perWordLabels {
-            label.removeFromSuperview()
-        }
         for bracket in brackets {
             bracket.removeFromSuperview()
         }
-        perWordLabels = []
         brackets = []
     }
 
     func listenForKeyDown() {
+        
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             self.keyDown(with: $0)
             return $0
@@ -196,7 +193,7 @@ extension ViewController {
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = true
         panel.allowedFileTypes = ["json"]
-        panel.directoryURL = URL(fileURLWithPath: NSString(string: "~/Developer/ComedyTokenizer/README-output.json").expandingTildeInPath, isDirectory: false)
+        panel.directoryURL = Examples.izzard1.url
         panel.begin { response in
 
             guard response == .OK else { return }
@@ -285,5 +282,40 @@ extension ViewController {
             json?[Keys.layout.rawValue] = layouts
             layOutBrackets()
         }
+    }
+
+    func replaceTinyLabelsWithSnapshot(width: CGFloat) {
+
+        view.frame = NSRect(origin: .zero, size: NSSize(width: width, height: 100))
+
+        let bitmapRep = view.bitmapImageRepForCachingDisplay(in: view.bounds)!
+        view.cacheDisplay(in: view.bounds, to: bitmapRep)
+        let image = NSImage(size: view.bounds.size)
+        image.addRepresentation(bitmapRep)
+
+        let imageView = NSImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+
+        for view in view.subviews {
+            view.removeFromSuperview()
+        }
+
+        view.addSubview(imageView)
+
+        let views = ["imageView": imageView]
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[imageView]", options: [], metrics: [:], views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[imageView]|", options: [], metrics: [:], views: views))
+    }
+
+    class func newWindow(url: URL) -> (NSWindowController, ViewController) {
+
+        let wc = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil).instantiateInitialController() as! NSWindowController
+        let vc = wc.contentViewController as! ViewController
+
+        vc.readURL = url
+        vc.loadFile(from: url)
+        vc.listenForKeyDown()
+
+        return (wc, vc)
     }
 }
