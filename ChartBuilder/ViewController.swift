@@ -91,6 +91,10 @@ private extension ViewController {
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
 
             brackets.append(bracket)
+
+//            if index > 1 {
+//                break
+//            }
         }
 
         // refresh toolbar
@@ -201,12 +205,29 @@ extension ViewController {
             let urls = panel.urls
 
             if let first = urls.first {
-                self.loadFile(from: first)
+
+                if first.isDirectory, let pathsInFolder = try? FileManager.default.contentsOfDirectory(atPath: first.path) {
+
+                    for path in pathsInFolder {
+                        let url = URL(fileURLWithPath: path)
+                        if url.pathExtension == "json" {
+                            let (wc, vc) = ViewController.newWindow(url: url)
+                            wc.window?.contentViewController = vc
+                            wc.window?.windowController = wc
+                            wc.showWindow(wc.window)
+                        }
+                    }
+
+                } else {
+                    self.loadFile(from: first)
+                }
             }
             if urls.count > 1 {
                 for url in urls.dropFirst() {
-                    let newWindow = NSWindow()
-                    newWindow.contentViewController = ViewController(url: url)
+                    let (wc, vc) = ViewController.newWindow(url: url)
+                    wc.window?.contentViewController = vc
+                    wc.window?.windowController = wc
+                    wc.showWindow(wc.window)
                 }
             }
         }
@@ -222,7 +243,7 @@ extension ViewController {
 
     @discardableResult func layOutBrackets() -> CGFloat {
 
-        view.layoutSubtreeIfNeeded()
+//        view.layoutSubtreeIfNeeded()
 
         // refresh toolbar
         guard let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
