@@ -12,6 +12,15 @@ import Quartz
 class ViewController: NSViewController {
 
     var perWordLabels: [NSTextView] = []
+    enum Examples: String {
+        case readme = "~/Developer/ComedyTokenizer/README-output.json"
+        case izzard1 = "~/Developer/ComedyTokenizer/source json/Izzard-DefiniteArticle-output.json"
+
+        var url: URL {
+            return URL(fileURLWithPath: NSString(string: rawValue).expandingTildeInPath, isDirectory: false)
+        }
+    }
+
     var brackets: [BracketView] = []
     var json: [String: Any]?
     var readURL: URL?

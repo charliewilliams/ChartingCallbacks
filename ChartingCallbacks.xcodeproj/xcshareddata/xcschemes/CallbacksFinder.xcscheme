@@ -76,6 +76,34 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "~/Developer/ComedyTokenizer/README.md"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/ChrisRock_BiggerAndBlacker.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/EddieMurphy_Delirious.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/Izzard-DefiniteArticle.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/Izzard-DressedToKill.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/Izzard-Glorious.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/MartinLawrence_Runteldat.txt"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/cw/Developer/ComedyTokenizer/txt-source/RobinWilliams_LiveonBroadway.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
