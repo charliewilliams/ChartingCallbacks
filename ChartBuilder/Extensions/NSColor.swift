@@ -28,27 +28,6 @@ enum AppColor: Int {
     }
 }
 
-//extension NSColor {
-//
-//    static var lightest: NSColor { return NSColor(hue: 41/255.0, saturation: 60/255.0, brightness: 92/255.0, alpha: 1) }
-//    static var darkest: NSColor { return NSColor(hue: 268/255.0, saturation: 37/255.0, brightness: 31/255.0, alpha: 1) }
-//    static func color(_ number: Int, of total: Int) -> NSColor {
-//
-//        let hueRange = CGFloat(268 - 41)
-//        let satRange = CGFloat(60 - 37)
-//        let brightRange = CGFloat(92 - 31)
-//
-//        let pct = CGFloat(number) / CGFloat(total)
-//
-//        let hue = hueRange * pct + 41
-//        let sat = 60 - satRange * pct
-//        let bright = 92 - brightRange * pct
-//
-//        return NSColor(calibratedHue: hue / 255, saturation: sat / 255, brightness: bright / 255, alpha: 1)
-////        return NSColor(hue: hue / 255.0, saturation: sat / 255.0, brightness: bright / 255.0, alpha: 1)
-//    }
-//}
-
 extension NSColor {
 
     convenience init(red: Int, green: Int, blue: Int) {
