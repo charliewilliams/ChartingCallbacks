@@ -270,6 +270,9 @@ extension ViewController {
                 bracket.mainLabelY = nextLabelY
                 bracket.mainLabelX = nextLabelX
                 nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
+
+                bracket.needsLayout = true
+                bracket.needsDisplay = true
             }
         }
 
