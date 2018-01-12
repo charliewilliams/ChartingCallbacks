@@ -20,9 +20,28 @@ class ViewController: NSViewController {
         }
     }
 
+    enum ToolbarElement: Int {
+        case minLengthSlider
+        case minOccurrencesSlider
+        case showHideInvisiblesButton
+
+        func slider(in view: NSView) -> NSSlider {
+            return element(in: view).view as! NSSlider
+        }
+
+        func toggle(in view: NSView) -> NSButton {
+            return element(in: view).view as! NSButton
+        }
+
+        func element(in view: NSView) -> NSToolbarItem! {
+            return view.window?.toolbar?.items[self.rawValue]
+        }
+    }
+
     var brackets: [BracketView] = []
     var json: [String: Any]?
     var readURL: URL?
+    var hideInvisibles = true
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -91,27 +110,21 @@ private extension ViewController {
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
 
             brackets.append(bracket)
-
-//            if index > 1 {
-//                break
-//            }
         }
 
         // refresh toolbar
-        if let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
-            let minLengthSlider = toolbar.items[0].view as? NSSlider,
-            let minOccurrencesSlider = toolbar.items[1].view as? NSSlider {
+        let minLengthSlider = ToolbarElement.minLengthSlider.slider(in: view)
+        let minOccurrencesSlider = ToolbarElement.minOccurrencesSlider.slider(in: view)
 
-            if let mostWordyPhrase = analysis.sorted(by: { $0.key.components(separatedBy: " ").count > $1.key.components(separatedBy: " ").count }).first?.key {
-                let maxValue = mostWordyPhrase.components(separatedBy: " ").count
-                minLengthSlider.maxValue = Double(maxValue)
-                toolbar.items[0].label = "1…\(maxValue) words"
-            }
+        if let mostWordyPhrase = analysis.sorted(by: { $0.key.components(separatedBy: " ").count > $1.key.components(separatedBy: " ").count }).first?.key {
+            let maxValue = mostWordyPhrase.components(separatedBy: " ").count
+            minLengthSlider.maxValue = Double(maxValue)
+            ToolbarElement.minLengthSlider.element(in: view).label = "1…\(maxValue) words"
+        }
 
-            if let maxNumberOfOccurrences = analysis.sorted(by: { $0.value.count > $1.value.count }).first?.value.count {
-                minOccurrencesSlider.maxValue = Double(maxNumberOfOccurrences)
-                toolbar.items[1].label = "2…\(maxNumberOfOccurrences) occurrences"
-            }
+        if let maxNumberOfOccurrences = analysis.sorted(by: { $0.value.count > $1.value.count }).first?.value.count {
+            minOccurrencesSlider.maxValue = Double(maxNumberOfOccurrences)
+            ToolbarElement.minOccurrencesSlider.element(in: view).label = "2…\(maxNumberOfOccurrences) occurrences"
         }
 
         let requiredHeight = layOutBrackets()
@@ -241,9 +254,14 @@ extension ViewController {
         layOutBrackets()
     }
 
-    @discardableResult func layOutBrackets() -> CGFloat {
+    @IBAction func showHideHiddenItemsSwitchChanged(_ sender: NSMenuItem) {
 
-//        view.layoutSubtreeIfNeeded()
+        let onOffSwitch = ToolbarElement.showHideInvisiblesButton.toggle(in: view)
+        hideInvisibles = onOffSwitch.state == .off
+        layOutBrackets()
+    }
+
+    @discardableResult func layOutBrackets() -> CGFloat {
 
         // refresh toolbar
         guard let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
@@ -262,7 +280,7 @@ extension ViewController {
 
             bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
 
-            if !bracket.isHidden {
+            if !bracket.isHidden || !hideInvisibles {
                 if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
                     nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
                     nextLabelX = 0
