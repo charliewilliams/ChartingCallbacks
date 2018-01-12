@@ -78,11 +78,7 @@ class BracketView: NSView {
     private let debugFill = false
     override func draw(_ dirtyRect: NSRect) {
 
-        if isHidden {
-            NSColor.clear.setFill()
-            dirtyRect.fill()
-            return
-        }
+        alphaValue = isHidden ? 0.5 : 1
 
         if debugFill {
             NSColor.orange.withAlphaComponent(0.1).setFill()
