@@ -79,23 +79,30 @@ private extension ViewController {
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
         let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
 
-        autoreleasepool {
+        let fullTextLabel = TinyLabel(words: fullText)
+        view.addSubview(fullTextLabel)
 
-            // tiny words of full text along the bottom
-            for (index, word) in fullText.enumerated() {
+        let views = ["fullTextLabel": fullTextLabel]
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[fullTextLabel]", options: [], metrics: [:], views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[fullTextLabel]|", options: [], metrics: [:], views: views))
 
-                autoreleasepool {
-
-                    let label = TinyLabel(string: word)
-                    view.addSubview(label)
-                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
-                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
-                }
-            }
-
-            view.layoutSubtreeIfNeeded()
-            replaceTinyLabelsWithSnapshot(width: totalWidth)
-        }
+//        autoreleasepool {
+//
+//            // tiny words of full text along the bottom
+//            for (index, word) in fullText.enumerated() {
+//
+//                autoreleasepool {
+//
+//                    let label = TinyLabel(string: word)
+//                    view.addSubview(label)
+//                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
+//                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
+//                }
+//            }
+//
+//            view.layoutSubtreeIfNeeded()
+//            replaceTinyLabelsWithSnapshot(width: totalWidth)
+//        }
 
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
@@ -113,6 +120,9 @@ private extension ViewController {
         }
 
         view.layoutSubtreeIfNeeded()
+
+        fullTextLabel.needsLayout = true
+        fullTextLabel.needsDisplay = true
 
         // refresh toolbar
         let minLengthSlider = ToolbarElement.minLengthSlider.slider(in: view)

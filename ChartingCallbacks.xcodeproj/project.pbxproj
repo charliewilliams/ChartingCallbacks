@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C02DA2EC2000EB4B00BA2FE7 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02DA2EB2000EB4B00BA2FE7 /* URL.swift */; };
+		C03960CD200AB0C600275C91 /* FullTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03960CC200AB0C600275C91 /* FullTextLabel.swift */; };
 		C060E3121FF44B5E005EDF8B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3111FF44B5E005EDF8B /* AppDelegate.swift */; };
 		C060E3141FF44B5E005EDF8B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060E3131FF44B5E005EDF8B /* ViewController.swift */; };
 		C060E3161FF44B5E005EDF8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060E3151FF44B5E005EDF8B /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		C02DA2EB2000EB4B00BA2FE7 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		C03960CC200AB0C600275C91 /* FullTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTextLabel.swift; sourceTree = "<group>"; };
 		C060E30F1FF44B5E005EDF8B /* ChartBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChartBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C060E3111FF44B5E005EDF8B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C060E3131FF44B5E005EDF8B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				C060E3641FF73F58005EDF8B /* BracketView.swift */,
 				C060E35A1FF6D0C8005EDF8B /* Alert.swift */,
 				C060E35C1FF6D307005EDF8B /* TinyLabel.swift */,
+				C03960CC200AB0C600275C91 /* FullTextLabel.swift */,
 				C060E3661FF74186005EDF8B /* BigLabel.swift */,
 				C060E35E1FF6D483005EDF8B /* Layout.swift */,
 				C0D7770C2002CD60002DF658 /* Extensions */,
@@ -360,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C03960CD200AB0C600275C91 /* FullTextLabel.swift in Sources */,
 				C060E3141FF44B5E005EDF8B /* ViewController.swift in Sources */,
 				C0E95B3E1FF992F900C782A0 /* String.swift in Sources */,
 				C060E35D1FF6D307005EDF8B /* TinyLabel.swift in Sources */,

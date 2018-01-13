@@ -11,18 +11,37 @@ import Cocoa
 class TinyLabel: NSTextView {
 
     override var intrinsicContentSize: NSSize {
-        return NSSize(width: Layout.tinyWordHorizontalSpacing * 10, height: Layout.tinyWordHorizontalSpacing)
+        return NSSize(width: Layout.tinyWordHorizontalSpacing * 10, height: Layout.tinyWordHorizontalSpacing * 10)
     }
 
-    init(string: String) {
+    override var wantsDefaultClipping: Bool {
+        return false
+    }
+
+    convenience init(words: [String], totalWidth: CGFloat = 2048) {
+        self.init(string: words.joined(separator: "\n"))
+    }
+
+    init(string: String, fontSize: CGFloat = Layout.tinyWordHorizontalSpacing * 0.8) {
         super.init(frame: .zero)
 
         self.string = string
 
-        font = NSFont.systemFont(ofSize: Layout.tinyWordHorizontalSpacing * 0.8)
+        wantsLayer = true
+
+        let layer = CATextLayer()
+        layer.string = string
+        layer.font = NSFont.systemFont(ofSize: fontSize)
+//        layer.fontSize = fontSize
+//        layer.setAffineTransform(CGAffineTransform(rotationAngle: 90))
+        layer.foregroundColor = NSColor.black.cgColor
+        layer.alignmentMode = kCAAlignmentRight
+
+        self.layer = layer
+
         translatesAutoresizingMaskIntoConstraints = false
-        frameRotation = 90
-        alignment = .right
+//        font = NSFont.systemFont(ofSize: fontSize)
+//        alignment = .right
         isSelectable = false
         drawsBackground = true
     }
@@ -39,14 +58,12 @@ class TinyLabel: NSTextView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func draw(_ dirtyRect: NSRect) {
-
-        if let context = NSGraphicsContext.current {
-            context.shouldAntialias = false
-            context.cgContext.setShouldAntialias(true)
-            context.cgContext.setShouldSmoothFonts(false)
-        }
-
-        super.draw(dirtyRect)
-    }
+//    override func draw(_ dirtyRect: NSRect) {
+//
+//        let rotate = CATransform3DMakeRotation(90.degreesToRadians, 0, 0, 1)
+//        let translate = CATransform3DMakeTranslation(bounds.width, 0, 0)
+//        layer?.transform = CATransform3DConcat(rotate, translate)
+//
+//        super.draw(dirtyRect)
+//    }
 }
