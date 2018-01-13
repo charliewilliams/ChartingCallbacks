@@ -112,6 +112,8 @@ private extension ViewController {
             brackets.append(bracket)
         }
 
+        view.layoutSubtreeIfNeeded()
+
         // refresh toolbar
         let minLengthSlider = ToolbarElement.minLengthSlider.slider(in: view)
         let minOccurrencesSlider = ToolbarElement.minOccurrencesSlider.slider(in: view)
