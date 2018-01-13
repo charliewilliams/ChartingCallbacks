@@ -13,7 +13,7 @@ class ViewController: NSViewController {
 
     enum Examples: String {
         case readme = "~/Developer/ChartingCallbacks/README-output.json"
-        case izzard1 = "~/Developer/ChartingCallbacks/source json/Izzard-DefiniteArticle-output.json"
+        case izzard1 = "~/Developer/ChartingCallbacks/data/json/Izzard-DefiniteArticle-output.json"
 
         var url: URL {
             return URL(fileURLWithPath: NSString(string: rawValue).expandingTildeInPath, isDirectory: false)
