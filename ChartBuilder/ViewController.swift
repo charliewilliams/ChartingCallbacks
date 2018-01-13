@@ -280,9 +280,9 @@ extension ViewController {
             let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLengthSlider.integerValue
             let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
 
-            bracket.isHidden = bracket.manuallyHidden || hiddenByLength || hiddenByCount
+            bracket.isHidden = (bracket.manuallyHidden && hideInvisibles) || hiddenByLength || hiddenByCount
 
-            if !bracket.isHidden || !hideInvisibles {
+            if !bracket.isHidden {
                 if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
                     nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
                     nextLabelX = 0

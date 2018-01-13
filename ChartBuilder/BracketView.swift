@@ -13,11 +13,14 @@ class BracketView: NSView {
     let phrase: String
     let indices: [Int]
     let mainLabel: NSTextView
-    var manuallyHidden: Bool = false
+    var manuallyHidden: Bool = false {
+        didSet {
+            displayAsSelected(manuallyHidden)
+        }
+    }
     var isSelected: Bool = false {
         didSet {
-            mainLabel.layer?.borderColor = isSelected ? NSColor.red.cgColor : nil
-            mainLabel.layer?.borderWidth = isSelected ? 1 : 0
+            displayAsSelected(isSelected)
 
             if isSelected {
                 NotificationCenter.default.post(Notification(name: bracketSelectedNotification, object: self))
@@ -68,6 +71,7 @@ class BracketView: NSView {
 
         if let layout = layout, layout["hidden"]?.boolValue == true {
             manuallyHidden = true
+            displayAsSelected(manuallyHidden)
         }
     }
 
@@ -77,8 +81,6 @@ class BracketView: NSView {
 
     private let debugFill = false
     override func draw(_ dirtyRect: NSRect) {
-
-        alphaValue = isHidden ? 0.5 : 1
 
         if debugFill {
             NSColor.orange.withAlphaComponent(0.1).setFill()
@@ -129,6 +131,14 @@ class BracketView: NSView {
 
             return path
         }
+    }
+
+    private func displayAsSelected(_ selected: Bool) {
+
+        mainLabel.layer?.borderColor = selected ? NSColor.red.cgColor : nil
+        mainLabel.layer?.borderWidth = selected ? 1 : 0
+
+        needsDisplay = true
     }
 
     let bracketSelectedNotification = Notification.Name("bracketSelectedNotification")
