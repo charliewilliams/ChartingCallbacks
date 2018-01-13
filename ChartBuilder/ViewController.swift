@@ -46,8 +46,8 @@ class ViewController: NSViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
-        readURL = Examples.readme.url
-//        readURL = Examples.izzard1.url
+//        readURL = Examples.readme.url
+        readURL = Examples.izzard1.url
         listenForKeyDown()
     }
 
@@ -83,26 +83,9 @@ private extension ViewController {
         view.addSubview(fullTextLabel)
 
         let views = ["fullTextLabel": fullTextLabel]
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[fullTextLabel]", options: [], metrics: [:], views: views))
+        let metrics = ["left": Layout.tinyWordLeftPadding, "width": totalWidth] as [String: NSNumber]
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(left)-[fullTextLabel(width)]", options: [], metrics: metrics, views: views))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[fullTextLabel]|", options: [], metrics: [:], views: views))
-
-//        autoreleasepool {
-//
-//            // tiny words of full text along the bottom
-//            for (index, word) in fullText.enumerated() {
-//
-//                autoreleasepool {
-//
-//                    let label = TinyLabel(string: word)
-//                    view.addSubview(label)
-//                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: Layout.tinyWordBottomPadding))
-//                    view.addConstraint(NSLayoutConstraint(item: label, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: Layout.tinyWordHorizontalSpacing * CGFloat(index + 1) + Layout.tinyWordLeftPadding))
-//                }
-//            }
-//
-//            view.layoutSubtreeIfNeeded()
-//            replaceTinyLabelsWithSnapshot(width: totalWidth)
-//        }
 
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
