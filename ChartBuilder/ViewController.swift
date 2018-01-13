@@ -296,7 +296,7 @@ extension ViewController {
             }
         }
 
-        return nextLabelY * 3 // this is annoyingly arbitrary
+        return nextLabelY * 4 // this is annoyingly arbitrary
     }
 
     @IBAction func save(_ sender: NSMenuItem) {
