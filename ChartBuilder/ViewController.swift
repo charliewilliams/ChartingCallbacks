@@ -23,6 +23,7 @@ class ViewController: NSViewController {
     enum ToolbarElement: Int {
         case minLengthSlider
         case minOccurrencesSlider
+        case minPercentSeparationSlider
         case showHideInvisiblesButton
 
         func slider(in view: NSView) -> NSSlider {
@@ -42,6 +43,7 @@ class ViewController: NSViewController {
     var json: [String: Any]?
     var readURL: URL?
     var hideInvisibles = true
+    var fullTextCount = 0
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -78,6 +80,7 @@ private extension ViewController {
 
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
         let totalWidth = Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
+        self.fullTextCount = fullText.count
 
         let fullTextLabel = TinyLabel(words: fullText)
         view.addSubview(fullTextLabel)
@@ -249,6 +252,10 @@ extension ViewController {
         layOutBrackets()
     }
 
+    @IBAction func minDistancePctChanged(_ sender: NSMenuItem) {
+        layOutBrackets()
+    }
+
     @IBAction func showHideHiddenItemsSwitchChanged(_ sender: NSMenuItem) {
 
         let onOffSwitch = ToolbarElement.showHideInvisiblesButton.toggle(in: view)
@@ -259,33 +266,38 @@ extension ViewController {
     @discardableResult func layOutBrackets() -> CGFloat {
 
         // refresh toolbar
-        guard let window = view.window, let toolbar = window.toolbar, toolbar.items.count > 1,
-            let minLengthSlider = toolbar.items[0].view as? NSSlider,
-            let minOccurrencesSlider = toolbar.items[1].view as? NSSlider else {
-                return 0
-        }
+        let minLength = ToolbarElement.minLengthSlider.slider(in: view).integerValue
+        let minOccurrences = ToolbarElement.minOccurrencesSlider.slider(in: view).integerValue
+        let minPctSeparation = ToolbarElement.minPercentSeparationSlider.slider(in: view).floatValue
 
         var nextLabelX: CGFloat = 0
         var nextLabelY: CGFloat = 0
 
         for bracket in brackets {
+            autoreleasepool {
 
-            let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLengthSlider.integerValue
-            let hiddenByCount =  bracket.indices.count < minOccurrencesSlider.integerValue
+                let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLength
+                let hiddenByCount =  bracket.indices.count < minOccurrences
 
-            bracket.isHidden = (bracket.manuallyHidden && hideInvisibles) || hiddenByLength || hiddenByCount
-
-            if !bracket.isHidden {
-                if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
-                    nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
-                    nextLabelX = 0
+                var hiddenBySeparation = true
+                if let max = bracket.indices.max(), let min = bracket.indices.min() {
+                    hiddenBySeparation = Float(max - min) < Float(fullTextCount) / minPctSeparation
                 }
-                bracket.mainLabelY = nextLabelY
-                bracket.mainLabelX = nextLabelX
-                nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
 
-                bracket.needsLayout = true
-                bracket.needsDisplay = true
+                bracket.isHidden = (bracket.manuallyHidden && hideInvisibles) || hiddenByLength || hiddenByCount || hiddenBySeparation
+
+                if !bracket.isHidden {
+                    if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
+                        nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
+                        nextLabelX = 0
+                    }
+                    bracket.mainLabelY = nextLabelY
+                    bracket.mainLabelX = nextLabelX
+                    nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
+
+                    bracket.needsLayout = true
+                    bracket.needsDisplay = true
+                }
             }
         }
 
