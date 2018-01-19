@@ -108,7 +108,7 @@ class BracketView: NSView {
     private func buildBezierPaths() {
 
         let endPoint = CGPoint(x: mainLabel.frame.midX, y: mainLabel.frame.minY)
-        let xPerIndex = NSLayoutManager().defaultLineHeight(for: Layout.tinyFont)
+        let xPerIndex = mainLabel.layoutManager!.defaultLineHeight(for: Layout.tinyFont)
 
         bezierPaths = indices.map { (index) -> NSBezierPath in
 
