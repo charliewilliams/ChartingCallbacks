@@ -48,8 +48,8 @@ class ViewController: NSViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
 
-//        readURL = Examples.readme.url
-        readURL = Examples.izzard1.url
+        readURL = Examples.readme.url
+//        readURL = Examples.izzard1.url
         listenForKeyDown()
     }
 
@@ -93,16 +93,18 @@ private extension ViewController {
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
 
-            let bracket = BracketView(phrase: callback.key, indices: callback.value, totalWordCount: fullText.count, color: AppColor.number(index), layout: layout?[callback.key])
-            view.addSubview(bracket)
+//            autoreleasepool {
+                let bracket = BracketView(phrase: callback.key, indices: callback.value, totalWordCount: fullText.count, color: AppColor.number(index), layout: layout?[callback.key])
+                view.addSubview(bracket)
 
-            let views = ["bracket": bracket]
-            let metrics = ["top": Layout.bigLabelTopPadding, "bottom": Layout.bracketStartY, "left": Layout.tinyWordLeftPadding, "width": totalWidth] as [String: NSNumber]
+                let views = ["bracket": bracket]
+                let metrics = ["top": Layout.bigLabelTopPadding, "bottom": Layout.bracketStartY, "left": Layout.tinyWordLeftPadding, "width": totalWidth] as [String: NSNumber]
 
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(left)-[bracket(width)]", options: [], metrics: metrics, views: views))
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
+                view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(left)-[bracket(width)]", options: [], metrics: metrics, views: views))
+                view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
 
-            brackets.append(bracket)
+                brackets.append(bracket)
+//            }
         }
 
         view.layoutSubtreeIfNeeded()
@@ -274,14 +276,15 @@ extension ViewController {
         var nextLabelY: CGFloat = 0
 
         for bracket in brackets {
-            autoreleasepool {
+//            autoreleasepool {
 
                 let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLength
                 let hiddenByCount =  bracket.indices.count < minOccurrences
 
                 var hiddenBySeparation = true
                 if let max = bracket.indices.max(), let min = bracket.indices.min() {
-                    hiddenBySeparation = Float(max - min) < Float(fullTextCount) / minPctSeparation
+                    let pctSeparation = Float(max - min) / Float(fullTextCount) * 100.0
+                    hiddenBySeparation = pctSeparation < minPctSeparation
                 }
 
                 bracket.isHidden = (bracket.manuallyHidden && hideInvisibles) || hiddenByLength || hiddenByCount || hiddenBySeparation
@@ -298,7 +301,7 @@ extension ViewController {
                     bracket.needsLayout = true
                     bracket.needsDisplay = true
                 }
-            }
+//            }
         }
 
         return nextLabelY * 4 // this is annoyingly arbitrary
