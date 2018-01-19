@@ -18,17 +18,24 @@ class TinyLabel: NSTextView {
         return false
     }
 
-    convenience init(words: [String]) {
-        self.init(string: words.joined(separator: "\n"))
-    }
-
-    init(string: String) {
+    init(words: [String], totalWidth: CGFloat) {
         super.init(frame: .zero)
 
-        self.string = string
+        self.string = words.joined(separator: "\n")
+
+        let lineHeight = totalWidth / CGFloat(words.count)
+        var font = NSFont.systemFont(ofSize: lineHeight)
+        var fontSize = lineHeight
+        
+        while layoutManager!.defaultLineHeight(for: font) > lineHeight {
+            autoreleasepool {
+                fontSize -= 1
+                font = NSFont.systemFont(ofSize: fontSize)
+            }
+        }
 
         translatesAutoresizingMaskIntoConstraints = false
-        font = Layout.tinyFont
+        self.font = font
         alignment = .right
         isSelectable = false
         drawsBackground = true

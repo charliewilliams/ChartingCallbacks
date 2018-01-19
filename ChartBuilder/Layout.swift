@@ -11,7 +11,7 @@ import AppKit
 struct Layout {
 
     static var tinyFontSize: CGFloat { return 6 }
-    static var tinyFont: NSFont { return NSFont.systemFont(ofSize: tinyFontSize) }
+    static let tinyFont = NSFont.systemFont(ofSize: tinyFontSize)
 
     static var leftMargin: CGFloat { return 0 }
     static var tinyWordHorizontalSpacing: CGFloat { return 8 }

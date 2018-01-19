@@ -10,8 +10,10 @@ import Cocoa
 
 class BigLabel: NSTextView {
 
+    static let defaultFont = NSFont.systemFont(ofSize: 48)
+
     override var intrinsicContentSize: NSSize {
-        let width = string.width(withConstrainedHeight: 60, font: font!)
+        let width = string.width(withConstrainedHeight: 60, font: BigLabel.defaultFont)
         return NSSize(width: width * 1.2, height: 60)
     }
 
@@ -20,7 +22,7 @@ class BigLabel: NSTextView {
 
         self.string = "\"\(string)\""
 
-        font = NSFont.systemFont(ofSize: 48)
+        font = BigLabel.defaultFont
         translatesAutoresizingMaskIntoConstraints = false
         alignment = .center
         isSelectable = false
