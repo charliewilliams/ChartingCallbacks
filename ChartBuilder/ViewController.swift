@@ -79,7 +79,7 @@ private extension ViewController {
         }
 
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
-        let totalWidth = NSScreen.main!.frame.size.width //Layout.tinyWordHorizontalSpacing * CGFloat(fullText.count - 2) + Layout.tinyWordLeftPadding
+        let totalWidth = NSScreen.main!.frame.size.width - Layout.tinyWordLeftPadding * 2
         self.fullTextCount = fullText.count
 
         let fullTextLabel = TinyLabel(words: fullText, totalWidth: totalWidth)
@@ -93,7 +93,7 @@ private extension ViewController {
         // for each 'callback' make a selectable bracket + label
         for (index, callback) in analysis.enumerated() {
 
-//            autoreleasepool {
+            autoreleasepool {
                 let bracket = BracketView(phrase: callback.key, indices: callback.value, totalWordCount: fullText.count, color: AppColor.number(index), layout: layout?[callback.key])
                 view.addSubview(bracket)
 
@@ -104,7 +104,7 @@ private extension ViewController {
                 view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(top)-[bracket]-(bottom)-|", options: [], metrics: metrics, views: views))
 
                 brackets.append(bracket)
-//            }
+            }
         }
 
         view.layoutSubtreeIfNeeded()
@@ -128,7 +128,7 @@ private extension ViewController {
         }
 
         let requiredHeight = layOutBrackets()
-        window.animator().setFrame(NSRect(origin: window.frame.origin, size: NSSize(width: totalWidth + Layout.tinyWordLeftPadding, height: requiredHeight)), display: true)
+        window.animator().setFrame(NSRect(origin: CGPoint(x: 0, y: NSScreen.main!.frame.size.height - 50), size: NSSize(width: totalWidth + Layout.tinyWordLeftPadding, height: requiredHeight)), display: true)
 
     }
 
@@ -274,37 +274,36 @@ extension ViewController {
 
         var nextLabelX: CGFloat = 0
         var nextLabelY: CGFloat = 0
+        let minHeight: CGFloat = 500
 
         for bracket in brackets {
-//            autoreleasepool {
 
-                let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLength
-                let hiddenByCount =  bracket.indices.count < minOccurrences
+            let hiddenByLength = bracket.phrase.components(separatedBy: " ").count < minLength
+            let hiddenByCount =  bracket.indices.count < minOccurrences
 
-                var hiddenBySeparation = true
-                if let max = bracket.indices.max(), let min = bracket.indices.min() {
-                    let pctSeparation = Float(max - min) / Float(fullTextCount) * 100.0
-                    hiddenBySeparation = pctSeparation < minPctSeparation
+            var hiddenBySeparation = true
+            if let max = bracket.indices.max(), let min = bracket.indices.min() {
+                let pctSeparation = Float(max - min) / Float(fullTextCount) * 100.0
+                hiddenBySeparation = pctSeparation < minPctSeparation
+            }
+
+            bracket.isHidden = (bracket.manuallyHidden && hideInvisibles) || hiddenByLength || hiddenByCount || hiddenBySeparation
+
+            if !bracket.isHidden {
+                if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
+                    nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
+                    nextLabelX = 0
                 }
+                bracket.mainLabelY = nextLabelY
+                bracket.mainLabelX = nextLabelX
+                nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
 
-                bracket.isHidden = (bracket.manuallyHidden && hideInvisibles) || hiddenByLength || hiddenByCount || hiddenBySeparation
-
-                if !bracket.isHidden {
-                    if nextLabelX + bracket.mainLabel.bounds.width > bracket.bounds.width {
-                        nextLabelY += bracket.mainLabel.bounds.height + Layout.perMainLabelSpacing
-                        nextLabelX = 0
-                    }
-                    bracket.mainLabelY = nextLabelY
-                    bracket.mainLabelX = nextLabelX
-                    nextLabelX += bracket.mainLabel.bounds.width + Layout.perMainLabelSpacing
-
-                    bracket.needsLayout = true
-                    bracket.needsDisplay = true
-                }
-//            }
+                bracket.needsLayout = true
+                bracket.needsDisplay = true
+            }
         }
 
-        return nextLabelY * 4 // this is annoyingly arbitrary
+        return nextLabelY > 0 ? nextLabelY * 4 : minHeight // this is annoyingly arbitrary
     }
 
     @IBAction func save(_ sender: NSMenuItem) {
