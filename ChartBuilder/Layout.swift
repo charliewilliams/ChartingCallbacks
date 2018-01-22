@@ -12,6 +12,7 @@ struct Layout {
 
     static var tinyFontSize: CGFloat { return 6 }
     static let tinyFont = NSFont.systemFont(ofSize: tinyFontSize)
+    static var totalWidth: CGFloat { return NSScreen.main!.frame.size.width - Layout.tinyWordLeftPadding * 2 }
 
     static var leftMargin: CGFloat { return 0 }
     static var tinyWordHorizontalSpacing: CGFloat { return 8 }

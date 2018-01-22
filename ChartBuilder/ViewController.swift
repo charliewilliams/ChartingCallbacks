@@ -79,8 +79,8 @@ private extension ViewController {
         }
 
         let layout = json[Keys.layout.rawValue] as? [String: [String: AnyObject]]
-        let totalWidth = NSScreen.main!.frame.size.width - Layout.tinyWordLeftPadding * 2
         self.fullTextCount = fullText.count
+        let totalWidth = Layout.totalWidth
 
         let fullTextLabel = TinyLabel(words: fullText, totalWidth: totalWidth)
         view.addSubview(fullTextLabel)
