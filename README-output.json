@@ -146,6 +146,9 @@
   "layout" : {
     "tokens" : {
       "hidden" : true
+    },
+    "the" : {
+      "hidden" : true
     }
   }
 }
